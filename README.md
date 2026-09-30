@@ -70,28 +70,21 @@ In plain words:
 
 ## 🏗️ How It Works
 
-```
- ┌──────────────┐   ┌────────────────┐   ┌───────────────┐
- │ Receive-only │──▶│  Capture NIC   │──▶│ Flow assembler│
- │ TAP / diode  │   │ (no TX pair)   │   │ uniflow/biflow│
- └──────────────┘   └────────────────┘   └───────┬───────┘
-                                                 │ tagged with visibility state
-                                                 ▼
-                        ┌──────────────────────────────────────┐
-                        │         Three detection layers        │
-                        │ 1. Statistical extractors             │
-                        │ 2. Supervised AI                      │
-                        │ 3. Unsupervised anomaly detection     │
-                        └───────────────────┬──────────────────┘
-                                            ▼
-                     ┌───────────────────────────────────────┐
-                     │ Risk scoring → Correlation (MITRE ATT&CK)│
-                     └───────────────────┬───────────────────┘
-                                         ▼
-              ┌──────────────────────────────────────────────────┐
-              │ Tamper-evident ledger (hash chain) → Dashboard     │
-              │ Alerts leave via a second diode or DMZ             │
-              └──────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["1. Receive-only TAP / data diode<br/>(no transmit pair)"]
+    B["2. Capture NIC<br/>(no IP, egress drop, zero-TX counters)"]
+    C["3. Flow assembler<br/>(uniflow / biflow + visibility tag)"]
+    D["4. Statistical layer<br/>(entropy, sketches, beaconing, fan-out)"]
+    E["5. Supervised AI layer<br/>(LightGBM, 1D-CNN, char-CNN)"]
+    F["6. Unsupervised layer<br/>(Isolation Forest)"]
+    G["7. Risk scoring<br/>(confidence + severity)"]
+    H["8. Correlation<br/>(attack chains, MITRE ATT&CK for ICS)"]
+    I["9. Tamper-evident ledger<br/>(hash chain)"]
+    J["10. Second diode / DMZ"]
+    K["11. Dashboard + JSON alerts"]
+
+    A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K
 ```
 
 ### 1. Read-only by hardware
