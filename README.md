@@ -1,170 +1,411 @@
-# AI-Based Detection of Cyber Threats in Unidirectional IP Traffic
+# UniGuard
 
-## SIH26145
+### AI-Based Detection of Cyber Threats in Unidirectional IP Traffic
 
-### 📌 Problem Statement
+**Smart India Hackathon 2026 — SIH26145**
 
-Industrial and critical infrastructure networks often use **unidirectional communication** to protect sensitive systems from external threats. While these networks improve security by preventing direct incoming connections, monitoring the traffic flowing through them and identifying malicious activity remains challenging.
+UniGuard is a cybersecurity monitoring system designed for **critical infrastructure and OT/ICS environments** where network traffic must be monitored without creating an inline communication path back into the protected network.
 
-The objective of this project is to develop a system capable of **monitoring unidirectional IP traffic and detecting potential cyber threats automatically**.
+The system analyzes **unidirectional network traffic**, extracts network and protocol-level features, detects suspicious behaviour, and generates security alerts with contextual visibility and tamper-evident evidence.
+
+---
+
+## 🎯 Problem
+
+Critical infrastructure such as:
+
+* Power
+* Water
+* Oil & Gas
+* Transportation
+
+uses Operational Technology (OT) networks to control physical processes.
+
+These environments require strong isolation because introducing an active monitoring system into the production network can itself create additional risk.
+
+Traditional security monitoring can also face limitations when:
+
+* Traffic is encrypted
+* Network visibility is incomplete
+* Systems must remain isolated
+* Monitoring equipment cannot actively probe the OT network
+* Security teams need reliable evidence for investigation
+
+UniGuard addresses these challenges through **passive, receive-only monitoring of unidirectional traffic**.
 
 ---
 
 ## 💡 Our Solution
 
-We propose a cybersecurity monitoring system that analyzes network traffic flowing through a **unidirectional network architecture**.
+UniGuard follows a **read-only monitoring architecture**.
 
-The system captures and processes network traffic, extracts important characteristics from packets, and uses a **machine-learning/deep-learning based detection mechanism** to identify suspicious or malicious traffic.
+Network traffic is copied from the OT environment through a:
 
-The detected threats can then be displayed through a monitoring dashboard, allowing security teams to understand and respond to potential attacks.
+* Receive-only Network TAP
+* Hardware Data Diode
+* SPAN/Mirror interface
 
----
-
-## 🏗️ System Overview
+The monitoring system receives a copy of the traffic but does not send packets back into the protected OT network.
 
 ```text
-        OT / Production Network
-                  │
-                  │
-          Network TAP / SPAN
-                  │
-                  ▼
-       ┌─────────────────────┐
-       │ Unidirectional Link │
-       │   / Data Diode      │
-       └──────────┬──────────┘
-                  │
-                  ▼
-       ┌─────────────────────┐
-       │ Traffic Collection  │
-       │ & Packet Processing │
-       └──────────┬──────────┘
-                  │
-                  ▼
-       ┌─────────────────────┐
-       │ Feature Extraction  │
-       └──────────┬──────────┘
-                  │
-                  ▼
-       ┌─────────────────────┐
-       │ Threat Detection    │
-       │      Model          │
-       └──────────┬──────────┘
-                  │
-          ┌───────┴────────┐
-          ▼                ▼
-      Normal Traffic    Threat Detected
-                           │
-                           ▼
-                    Alert / Dashboard
+                    OT / PRODUCTION NETWORK
+                             │
+                             │
+                    Network TAP / SPAN
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ Hardware Data   │
+                    │     Diode       │
+                    └────────┬────────┘
+                             │
+                             │ One-way traffic
+                             ▼
+                    ┌─────────────────┐
+                    │    UniGuard     │
+                    │ Monitoring Node │
+                    └────────┬────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              ▼              ▼              ▼
+         Packet/Flow    Feature          Protocol
+         Processing    Extraction        Analysis
+              │              │              │
+              └──────────────┼──────────────┘
+                             ▼
+                    ┌─────────────────┐
+                    │ Threat Detection│
+                    │     Engine      │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ Alert Generation│
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │ Tamper-Evident  │
+                    │ Evidence Store  │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │    Dashboard    │
+                    └─────────────────┘
 ```
 
 ---
 
-## ⚙️ How It Works
+## 🔐 Core Security Principle
 
-### 1. Traffic Collection
+### No Inline Path. No Probing.
 
-Network traffic is collected from the monitored environment using mechanisms such as:
+UniGuard is designed around passive monitoring.
 
-* Network TAP
-* SPAN/Mirror Port
-* Packet capture interfaces
-* PCAP files
+The primary protection is provided by the **receive-only TAP / hardware data diode architecture**.
 
-### 2. Packet Processing
+Additional supporting controls can include:
 
-Captured traffic is processed to extract useful network information such as:
+* Zero-TX monitoring
+* Network interface restrictions
+* Firewall rules
+* `nftables`
+* Isolated management connectivity
 
-* Source IP
-* Destination IP
-* Source Port
-* Destination Port
-* Protocol
-* Packet size
-* Packet frequency
-* Flow information
-
-### 3. Feature Extraction
-
-Relevant features are extracted from the network traffic and converted into a format that can be processed by the detection model.
-
-### 4. Threat Detection
-
-The extracted features are passed to the trained detection model.
-
-The model classifies traffic as:
-
-```text
-Normal Traffic
-       OR
-Suspicious / Malicious Traffic
-```
-
-The system can be trained to identify different types of network attacks depending on the dataset used.
-
-### 5. Alert Generation
-
-When suspicious traffic is detected, the system generates an alert containing relevant information about the detected activity.
-
-### 6. Monitoring Dashboard
-
-A dashboard can provide security personnel with information such as:
-
-* Current network activity
-* Detected threats
-* Threat type
-* Source and destination information
-* Detection timestamp
-* Traffic statistics
-* Threat history
-
----
-
-## 🧠 Machine Learning / Deep Learning
-
-The project can use machine-learning and deep-learning techniques for network traffic classification.
-
-Possible approaches include:
-
-* 1D Convolutional Neural Network (1D-CNN)
-* Random Forest
-* XGBoost
-* Neural Networks
-* Anomaly Detection
-
-The model can be trained using publicly available cybersecurity datasets and evaluated using appropriate classification metrics.
-
----
-
-## 📊 Dataset
-
-The system can be trained and tested using network security datasets containing both normal and malicious traffic.
-
-Example datasets include:
-
-* CTU-13
-* CICIDS
-* CIC-DDoS
-* Other relevant network traffic datasets
-
-The dataset is processed before training to remove unnecessary information and convert network traffic into suitable model features.
+The management side is separated from the OT environment through a **second diode or DMZ**, preventing the monitoring system from becoming a communication path into the production network.
 
 ---
 
 ## 🔍 Threat Detection
 
-The system is designed to detect suspicious network behaviour such as:
+UniGuard is designed to detect the threat classes defined for SIH26145.
 
-* Denial-of-Service attacks
-* Distributed Denial-of-Service attacks
-* Port scanning
-* Network scanning
-* Brute-force activity
-* Suspicious connection patterns
-* Abnormal traffic behaviour
+The monitored threat categories include:
 
-The exact attack categories depend on the dataset and trained model.
+1. **DDoS**
+2. **C2 Beaconing**
+3. **Domain Generation Algorithm (DGA)**
+4. **DNS Tunnelling**
+5. **Encrypted Malware**
+6. **Reconnaissance / Exfiltration**
+
+DGA and DNS tunnelling are treated as separate detection/scoring categories.
+
+---
+
+## 🧠 Detection Approach
+
+UniGuard combines network traffic processing, feature extraction, protocol analysis, and machine-learning-based detection.
+
+The general pipeline is:
+
+```text
+Network Traffic
+       ↓
+Packet / Flow Collection
+       ↓
+Preprocessing
+       ↓
+Feature Extraction
+       ↓
+Protocol Analysis
+       ↓
+Detection Models
+       ↓
+Threat Classification
+       ↓
+MITRE ATT&CK for ICS Mapping
+       ↓
+Alert Generation
+       ↓
+Evidence Storage
+       ↓
+Dashboard
+```
+
+The system is designed to work with both **visible network information and encrypted traffic metadata**, without requiring payload decryption.
+
+---
+
+## 🔒 Encrypted Traffic Detection
+
+Encrypted communication can hide malicious payloads from traditional deep-packet inspection.
+
+UniGuard focuses on metadata and behavioural characteristics rather than decrypting the communication.
+
+Relevant information can include:
+
+* Flow behaviour
+* Connection frequency
+* Packet characteristics
+* Timing patterns
+* TLS-related fingerprints
+* JA4 fingerprinting
+* Communication relationships
+* Behavioural anomalies
+
+This allows suspicious encrypted communication to be investigated without requiring access to the encrypted payload.
+
+---
+
+## 🏭 OT / ICS Protocol Coverage
+
+The architecture is designed to support industrial protocols such as:
+
+* **Modbus**
+* **DNP3**
+* **IEC 104**
+
+Protocol support can be expanded as additional parsers and datasets become available.
+
+Where protocol parsing is not yet implemented, the protocol is treated as a planned extension rather than a completed capability.
+
+---
+
+## 🧭 MITRE ATT&CK for ICS
+
+Detected activities are mapped to the **MITRE ATT&CK for ICS** framework wherever applicable.
+
+This provides security analysts with additional context about:
+
+* Attack behaviour
+* Adversary techniques
+* Potential objectives
+* OT-specific attack patterns
+
+The system prioritizes ATT&CK for ICS rather than using generic Enterprise ATT&CK terminology where an ICS technique is available.
+
+---
+
+## 🧾 Tamper-Evident Evidence
+
+UniGuard maintains security evidence using a **tamper-evident hash-chained ledger**.
+
+Each recorded event can contain:
+
+* Timestamp
+* Source information
+* Destination information
+* Protocol
+* Detection result
+* Threat category
+* Relevant metadata
+* Previous record hash
+* Current record hash
+
+Conceptually:
+
+```text
+Event 1
+   │
+   └── Hash 1
+          ↓
+Event 2 + Hash 1
+   │
+   └── Hash 2
+          ↓
+Event 3 + Hash 2
+   │
+   └── Hash 3
+```
+
+If an earlier record is modified, the hash relationship can reveal the alteration.
+
+A blockchain consensus mechanism is not required because the system operates with a trusted monitoring sensor rather than multiple independent writers.
+
+---
+
+## 🚨 Alert Structure
+
+A UniGuard alert can contain information such as:
+
+```json
+{
+  "timestamp": "2026-09-30T12:00:00Z",
+  "source": "192.168.1.10",
+  "destination": "192.168.1.20",
+  "protocol": "Modbus",
+  "threat": "Reconnaissance",
+  "severity": "High",
+  "visibility": "Encrypted Metadata",
+  "ja4": "example_fingerprint",
+  "mitre_attack_ics": "Technique",
+  "evidence_hash": "example_hash"
+}
+```
+
+The exact schema may evolve as implementation progresses.
+
+---
+
+## 📊 Visibility State
+
+Every alert can include a visibility state describing what information was available to the detection system.
+
+Examples include:
+
+```text
+Cleartext
+Encrypted Metadata
+Flow Metadata
+Protocol Metadata
+Limited Visibility
+```
+
+This allows analysts to understand **what the system actually observed** instead of treating every detection as having the same level of visibility.
+
+---
+
+## 📈 Performance Targets
+
+The current architecture includes performance targets that will be replaced with measured results as testing progresses.
+
+| Metric        | Target                            |
+| ------------- | --------------------------------- |
+| Alert latency | p99 < 1 second                    |
+| Throughput    | ≥ 5,000 flows/sec on one CPU core |
+| Hardware      | CPU-only deployment               |
+| GPU           | Not required                      |
+
+**Important:** Performance numbers are labelled as targets until they are experimentally measured.
+
+---
+
+## 🧪 Evaluation
+
+UniGuard can be evaluated using network security datasets and captured traffic.
+
+Potential datasets include:
+
+* CIC-IDS2017
+* CTU-13
+* CIC-DDoS2019
+* ICS/OT-specific datasets and PCAP collections
+
+For OT validation, datasets such as **4SICS, SWaT, HAI, or CIC Modbus** can be evaluated based on availability and licensing.
+
+### Evaluation Metrics
+
+The model will be evaluated using:
+
+* Precision
+* Recall
+* F1-score
+* False-positive rate
+* Detection latency
+* Network throughput
+
+Where applicable, both:
+
+* Random-split results
+* Cross-capture results
+
+will be reported to provide a more realistic evaluation of generalization.
+
+---
+
+## 🖥️ Dashboard
+
+The UniGuard dashboard is intended to provide security analysts with a centralized view of detected activity.
+
+The dashboard can display:
+
+* Active alerts
+* Threat categories
+* Severity
+* Source and destination information
+* Protocol
+* Visibility state
+* JA4 information
+* ATT&CK for ICS mapping
+* Detection timestamps
+* Evidence status
+* Traffic statistics
+
+---
+
+## 🏗️ Architecture Components
+
+### 1. Traffic Collection
+
+Receives a one-way copy of network traffic from the protected environment.
+
+### 2. Packet / Flow Processor
+
+Processes packets and groups them into useful network flows.
+
+### 3. Feature Extraction
+
+Extracts network, timing, protocol and metadata features.
+
+### 4. Protocol Analysis
+
+Analyzes supported OT/ICS protocols and network communication patterns.
+
+### 5. Threat Detection Engine
+
+Uses detection logic and machine-learning models to identify suspicious behaviour.
+
+### 6. Threat Classification
+
+Classifies detected behaviour into the supported threat categories.
+
+### 7. ATT&CK for ICS Mapping
+
+Maps relevant detections to OT-specific adversary techniques.
+
+### 8. Evidence Store
+
+Stores security events using a tamper-evident hash chain.
+
+### 9. Alert Management
+
+Generates structured alerts for security analysts.
+
+### 10. Dashboard
+
+Provides visualization and investigation capabilities.
 
 ---
 
@@ -173,72 +414,72 @@ The exact attack categories depend on the dataset and trained model.
 ### Programming
 
 * Python
+* JavaScript / TypeScript
 
 ### Machine Learning
 
-* TensorFlow / Keras
+* Python ML libraries
 * Scikit-learn
-* NumPy
-* Pandas
+* TensorFlow / Keras where required
 
-### Network Analysis
+### Network Security
 
 * Wireshark
-* Tshark
 * Scapy
-* PCAP analysis
+* Zeek
+* Network PCAP analysis
+* `nftables`
 
-### Backend
+### Protocol Analysis
 
-* Python
-* FastAPI / Flask
+* Modbus
+* DNP3
+* IEC 104
 
 ### Frontend
 
-* React.js
-* HTML
-* CSS
-* JavaScript
+* React
 
-### Visualization
+### Backend
 
-* Chart.js / Recharts
-* Grafana
+* Python-based API
 
-### Development Tools
+### Security Framework
 
-* Git
-* GitHub
-* VS Code
+* MITRE ATT&CK for ICS
+
+### Deployment
+
+* Linux
 * Docker
+* CPU-only architecture
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-SIH26145/
+UniGuard/
 │
 ├── backend/
 │   ├── api/
-│   ├── models/
 │   ├── detection/
-│   └── preprocessing/
+│   ├── preprocessing/
+│   ├── protocols/
+│   └── evidence/
 │
 ├── frontend/
 │   ├── src/
 │   ├── components/
 │   └── pages/
 │
-├── dataset/
-│   └── README.md
-│
 ├── models/
 │   └── trained_models/
 │
-├── sample_pcaps/
+├── datasets/
+│   └── README.md
 │
-├── notebooks/
+├── sample_pcaps/
 │
 ├── scripts/
 │
@@ -255,34 +496,32 @@ SIH26145/
 
 ## 🚀 Installation
 
-### Clone the Repository
+Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/<your-repository>.git
-cd <your-repository>
+git clone https://github.com/<your-username>/UniGuard.git
+cd UniGuard
 ```
 
-### Create a Virtual Environment
+Create a Python virtual environment:
 
 ```bash
 python -m venv venv
 ```
 
-### Activate the Environment
-
-#### Windows
+Activate it on Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-#### Linux / macOS
+Activate it on Linux:
 
 ```bash
 source venv/bin/activate
 ```
 
-### Install Dependencies
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -290,111 +529,97 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Running the Project
+## ▶️ Running the System
 
-Start the backend:
+The exact commands may change during development.
 
-```bash
-python app.py
-```
-
-Start the frontend:
-
-```bash
-npm install
-npm run dev
-```
-
-The dashboard can then be accessed through the local development server.
-
----
-
-## 🧪 Testing
-
-The system can be tested using:
-
-* Pre-recorded PCAP files
-* Simulated network traffic
-* Public cybersecurity datasets
-* Normal and malicious traffic samples
-
-Example workflow:
+Typical workflow:
 
 ```text
-PCAP File
-   ↓
-Packet Extraction
-   ↓
-Feature Extraction
-   ↓
-Preprocessing
-   ↓
-ML/DL Model
-   ↓
-Traffic Classification
-   ↓
-Threat Alert
+1. Start the backend
+2. Load the detection model
+3. Provide PCAP / network traffic
+4. Process packets and flows
+5. Run feature extraction
+6. Perform threat detection
+7. Generate alerts
+8. Store evidence
+9. View results on dashboard
 ```
 
 ---
 
-## 🔐 Security Considerations
+## 🗺️ Development Roadmap
 
-The proposed architecture focuses on monitoring traffic without creating a direct communication path back into the protected network.
+### Phase 1 — Prototype
 
-Important considerations include:
+* Network traffic processing
+* IT cybersecurity datasets
+* Initial detection models
+* Basic alert generation
 
-* One-way traffic flow
-* Isolation of critical systems
-* Secure traffic collection
-* Protection of captured network data
-* Model integrity
-* Secure dashboard access
-* Logging and auditing
+### Phase 2 — ICS Validation
+
+* ICS datasets
+* OT protocol analysis
+* ATT&CK for ICS mapping
+* Encrypted traffic evaluation
+* Cross-capture testing
+
+### Phase 3 — Testbed / Pilot
+
+* OT testbed deployment
+* Receive-only hardware architecture
+* Performance testing
+* Realistic traffic validation
+* Dashboard deployment
+* Operational evaluation
 
 ---
 
-## 📈 Future Scope
+## 🌐 Applications
 
-Future improvements may include:
+UniGuard is intended for environments where network visibility and isolation are critical, including:
 
-* Real-time packet analysis
-* Improved anomaly detection
-* Support for additional attack types
-* Continuous model retraining
+* Power utilities
+* Water treatment
+* Oil and gas
+* Transportation
+* Industrial automation
+* Critical infrastructure SOCs
+* OT security monitoring environments
+
+---
+
+## 🔮 Future Scope
+
+Future development may include:
+
+* Additional ICS protocol support
+* Real-time packet processing
+* Improved encrypted-traffic detection
+* More advanced anomaly detection
 * Automated threat correlation
-* Real-time dashboards
-* Integration with SIEM systems
-* Automated incident response
-* Deployment using Docker/Kubernetes
-* Support for large-scale industrial networks
-
----
-
-## 🎯 Expected Outcome
-
-The final system aims to provide a **practical network security monitoring solution** capable of:
-
-1. Capturing unidirectional network traffic.
-2. Processing network packets.
-3. Extracting relevant traffic features.
-4. Detecting abnormal or malicious behaviour.
-5. Classifying potential cyber threats.
-6. Generating security alerts.
-7. Presenting useful information through a monitoring dashboard.
+* Expanded ATT&CK for ICS mapping
+* SIEM integration
+* Automated incident-response workflows
+* Large-scale OT testbed validation
+* Additional hardware data-diode integrations
 
 ---
 
 ## 👥 Team
 
+### Team CeaserX
+
 **Smart India Hackathon 2026**
 
 **Problem Statement:** SIH26145
+**Project:** UniGuard
 **Domain:** Cybersecurity
 
 ---
 
 ## 📜 License
 
-This project is developed as part of **Smart India Hackathon 2026** for educational and research purposes.
-
+This project is developed as part of **Smart India Hackathon 2026** for research, development, and educational purposes.
