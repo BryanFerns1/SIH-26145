@@ -142,3 +142,10 @@ Invoke-RestMethod http://127.0.0.1:8000/api/alerts
 - The alert history and throughput window are in-memory prototype metrics. The rate window is three seconds; the total flow count and alert history reset when the backend process restarts.
 
 For more sensor implementation details, see [`sensor/README.md`](sensor/README.md). For model artifact discovery, see [`docs/MODEL_DISCOVERY.md`](docs/MODEL_DISCOVERY.md).
+
+## Team
+
+- Shrihari Girish Rodda
+- Bryan R Fernandes
+- Sourabh Shankar Itagi
+- Kiran A Patil
