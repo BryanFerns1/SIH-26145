@@ -100,6 +100,27 @@ sudo .venv/bin/python flow_sensor.py \
 
 The sensor requires packet-capture privileges. For a capture-only check, add `--dry-run`; remove that flag to send observed flows to the backend. Detailed interface, firewall, and troubleshooting guidance is in [`sensor/README.md`](sensor/README.md).
 
+## Deploy on Render
+
+The repository includes [`render.yaml`](render.yaml), which defines a Docker web service for the FastAPI backend and a static site for the Vite dashboard. Push the repository to GitHub, then in Render choose **New → Blueprint**, select the repository, and apply the Blueprint. Render builds the frontend with the backend's HTTPS URL, and the dashboard uses that URL for both API polling and its WebSocket connection.
+
+The backend service is set to the `1c-2g` plan because startup loads all three bundled models; this is a paid compute plan. Review the plan and current pricing in Render before creating the services. The frontend static site does not use a web-service compute plan. Render's web services must bind to `0.0.0.0` and use its `PORT`; the backend Docker command now follows those settings.
+
+The Blueprint generates `SENSOR_API_KEY` and `ADMIN_API_KEY` for the backend. Copy the sensor key from the backend service's Render environment settings to Kali as `UNIGUARD_SENSOR_API_KEY`; do not put either key in the frontend or commit it. Then run the sensor using the Render backend URL shown in the service overview:
+
+```bash
+export UNIGUARD_SENSOR_API_KEY='<sensor-key-from-render>'
+sudo --preserve-env=UNIGUARD_SENSOR_API_KEY .venv/bin/python flow_sensor.py \
+  --mode private-lab \
+  --interface <KALI_INTERFACE> \
+  --target <PRIVATE_LAB_TARGET_IP> \
+  --port <TARGET_PORT> \
+  --backend-url https://<BACKEND_SERVICE>.onrender.com/api/flows \
+  --allow-public-backend
+```
+
+Set `X-Admin-Key` to the backend's `ADMIN_API_KEY` when calling the deployed `DELETE /api/alerts` endpoint. Local development remains unchanged when these environment keys are unset. Alert history and throughput are process memory, so they reset when Render restarts or redeploys the backend; a free instance may also sleep while idle, so allow for a cold start before testing.
+
 ## API and dashboard updates
 
 | Endpoint | Purpose |

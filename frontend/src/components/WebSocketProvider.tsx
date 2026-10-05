@@ -1,6 +1,12 @@
 import { useEffect, type ReactNode } from 'react'
 import { useStore } from '../store/useStore'
 
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/+$/, '')
+const apiUrl = (path: string) => `${apiBaseUrl}${path}`
+const websocketUrl = apiBaseUrl
+  ? `${apiBaseUrl.replace(/^http:/, 'ws:').replace(/^https:/, 'wss:')}/ws`
+  : `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`
+
 export function WebSocketProvider({ children }: { children: ReactNode }) {
   const addAlert = useStore(state => state.addAlert)
   const setRecentAlerts = useStore(state => state.setRecentAlerts)
@@ -15,7 +21,7 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
 
     const refreshAlerts = async () => {
       try {
-        const response = await fetch('/api/alerts?limit=100')
+        const response = await fetch(apiUrl('/api/alerts?limit=100'))
         if (!response.ok) throw new Error(`Alert history request failed (${response.status})`)
         const result = await response.json() as { total: number; alerts: import('../store/useStore').Alert[] }
         if (!disposed) setRecentAlerts(result.alerts, result.total)
@@ -29,7 +35,7 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
 
     const refreshThroughput = async () => {
       try {
-        const response = await fetch('/api/metrics')
+        const response = await fetch(apiUrl('/api/metrics'))
         if (!response.ok) throw new Error(`Throughput request failed (${response.status})`)
         const result = await response.json() as { flows_per_sec: number; measurement_window_seconds: number }
         if (!disposed) setThroughput(result.flows_per_sec, result.measurement_window_seconds)
@@ -48,8 +54,7 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
 
     const connect = () => {
       if (disposed) return
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-      socket = new WebSocket(`${protocol}//${window.location.host}/ws`)
+      socket = new WebSocket(websocketUrl)
 
       socket.onopen = () => {
         retry = 0

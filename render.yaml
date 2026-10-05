@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: uniguard-api
+    runtime: docker
+    plan: 1c-2g
+    region: singapore
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: SENSOR_API_KEY
+        generateValue: true
+      - key: ADMIN_API_KEY
+        generateValue: true
+
+  - type: web
+    name: uniguard-dashboard
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: uniguard-api
+          envVarKey: RENDER_EXTERNAL_URL

@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     # ── Logging ───────────────────────────────────────────
     log_level: str = "INFO"
 
+    # Optional deployment credentials. Empty values preserve the local prototype workflow.
+    sensor_api_key: str = ""
+    admin_api_key: str = ""
+
     model_config = {"env_prefix": "", "case_sensitive": False}
 
 

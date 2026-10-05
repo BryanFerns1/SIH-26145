@@ -1,10 +1,11 @@
 """UniGuard FastAPI application."""
 
 import logging
+import secrets
 from contextlib import asynccontextmanager
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Header, HTTPException, Query, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
@@ -128,8 +129,10 @@ async def get_alerts(limit: int = Query(default=100, ge=1, le=500)):
 
 
 @app.delete("/api/alerts")
-async def clear_alerts():
+async def clear_alerts(x_admin_key: str | None = Header(default=None)):
     """Clear the prototype's in-memory alert history."""
+    if settings.admin_api_key and not secrets.compare_digest(x_admin_key or "", settings.admin_api_key):
+        raise HTTPException(status_code=401, detail="A valid admin API key is required.")
     if flow_processor is None:
         raise HTTPException(status_code=503, detail="The analysis pipeline is not ready.")
     cleared = flow_processor.clear_alerts()
@@ -137,8 +140,13 @@ async def clear_alerts():
 
 
 @app.post("/api/flows")
-async def ingest_flows(flows: list[dict[str, Any]]):
+async def ingest_flows(
+    flows: list[dict[str, Any]],
+    x_sensor_key: str | None = Header(default=None),
+):
     """Analyze actual flow records supplied by a network sensor."""
+    if settings.sensor_api_key and not secrets.compare_digest(x_sensor_key or "", settings.sensor_api_key):
+        raise HTTPException(status_code=401, detail="A valid sensor API key is required.")
     if not flows:
         raise HTTPException(status_code=422, detail="Send at least one observed flow.")
     if len(flows) > 4096:

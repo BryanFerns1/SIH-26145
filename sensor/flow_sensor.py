@@ -7,6 +7,7 @@ import argparse
 import ipaddress
 import json
 import logging
+import os
 import queue
 import statistics
 import sys
@@ -45,6 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--target", required=True, type=private_address, help="Private IP address of the controlled lab server.")
     parser.add_argument("--port", required=True, type=int, help="Destination TCP/UDP port on the controlled lab server.")
     parser.add_argument("--backend-url", default="http://127.0.0.1:8000/api/flows", help="UniGuard POST /api/flows URL.")
+    parser.add_argument("--allow-public-backend", action="store_true", help="Allow a public HTTPS backend URL (use only with UNIGUARD_SENSOR_API_KEY set).")
     parser.add_argument("--flow-timeout", type=float, default=5.0, help="Idle timeout in seconds before a flow is exported (default: 5).")
     parser.add_argument("--active-timeout", type=float, default=60.0, help="Maximum flow age in seconds (default: 60).")
     parser.add_argument("--source-filter", help="Optional source IP/CIDR filter, restricted to private lab ranges.")
@@ -72,7 +74,12 @@ def parse_args() -> argparse.Namespace:
     parsed_url = urlparse(args.backend_url)
     if parsed_url.scheme not in {"http", "https"} or not parsed_url.hostname or not parsed_url.path.endswith("/api/flows"):
         parser.error("--backend-url must be an HTTP(S) URL ending in /api/flows")
-    if parsed_url.hostname == "localhost":
+    if args.allow_public_backend:
+        if parsed_url.scheme != "https" or parsed_url.hostname in {"localhost", "127.0.0.1", "::1"}:
+            parser.error("--allow-public-backend requires a public HTTPS --backend-url")
+        if not os.environ.get("UNIGUARD_SENSOR_API_KEY"):
+            parser.error("set UNIGUARD_SENSOR_API_KEY before using --allow-public-backend")
+    elif parsed_url.hostname == "localhost":
         pass
     else:
         try:
@@ -333,9 +340,11 @@ class LabFlowSensor:
 
     def _post_batch(self, client: httpx.Client, batch: list[dict[str, Any]]) -> None:
         LOG.info("[EXPORT] POST %s (%d observed flow(s))", self.args.backend_url, len(batch))
+        sensor_key = os.environ.get("UNIGUARD_SENSOR_API_KEY", "")
+        headers = {"X-Sensor-Key": sensor_key} if sensor_key else None
         for attempt in range(1, 4):
             try:
-                response = client.post(self.args.backend_url, json=batch)
+                response = client.post(self.args.backend_url, json=batch, headers=headers)
                 response.raise_for_status()
                 result = response.json()
                 LOG.info("[MODEL] backend accepted %s flow(s), returned %s alert(s), processing %.2f ms",
