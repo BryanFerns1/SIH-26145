@@ -143,6 +143,10 @@ Invoke-RestMethod http://127.0.0.1:8000/api/alerts
 
 For more sensor implementation details, see [`sensor/README.md`](sensor/README.md). For model artifact discovery, see [`docs/MODEL_DISCOVERY.md`](docs/MODEL_DISCOVERY.md).
 
+## Prototype demo
+
+[View the screen recording and screenshots of the prototype demo](https://drive.google.com/drive/folders/1SSa41mV76reUJwQiKMfRAyxqldMEMnto).
+
 ## Team
 
 - Shrihari Girish Rodda
