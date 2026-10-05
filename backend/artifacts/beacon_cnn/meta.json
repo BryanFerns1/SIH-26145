@@ -1,0 +1,106 @@
+{
+  "N": 32,
+  "K": 32,
+  "channels_A": [
+    "log1p_pkt_size",
+    "log1p_iat_us",
+    "padding_mask",
+    "tcp_syn",
+    "tcp_fin",
+    "tcp_rst",
+    "tcp_psh"
+  ],
+  "channels_B": [
+    "log1p_gap_seconds",
+    "log1p_fwd_bytes",
+    "log1p_fwd_packets"
+  ],
+  "pkt_size_log_scale": 0.09090909090909091,
+  "iat_log_scale": 0.054288816503800214,
+  "iat_clip_us": 100000000.0,
+  "gap_log_scale": 0.07142857142857142,
+  "gap_clip_s": 1200000.0,
+  "bytes_log_scale": 0.043478260869565216,
+  "packets_log_scale": 0.0625,
+  "class_names": [
+    "benign",
+    "botnet"
+  ],
+  "thresholds": {
+    "HIGH": {
+      "score": 0.914893627166748,
+      "target_fpr": 0.002,
+      "achieved_fpr_cal": 0.004011107682813947,
+      "achieved_recall_cal": 0.9621418113365404,
+      "n_benign_cal": 3241,
+      "achieved_fpr_test": 0.03278688524590164,
+      "achieved_recall_test": 0.8593228421554602
+    },
+    "REVIEW": {
+      "score": 0.4285714030265808,
+      "target_fpr": 0.01,
+      "achieved_fpr_cal": 0.05738969453872261,
+      "achieved_recall_cal": 0.9943526458899812,
+      "n_benign_cal": 3241,
+      "achieved_fpr_test": 0.48587373561213815,
+      "achieved_recall_test": 0.9747257987601335
+    }
+  },
+  "input_shape_A": [
+    32,
+    7
+  ],
+  "input_shape_B": null,
+  "n_params": 21697,
+  "seeds": [
+    42
+  ],
+  "train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "val_scenarios": [
+    6,
+    7
+  ],
+  "cal_scenarios": [
+    13
+  ],
+  "test_scenarios": [
+    8,
+    12
+  ],
+  "checkpoint": "best",
+  "training_data_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "missing_scenarios": [
+    9,
+    10,
+    11
+  ],
+  "library_versions": {
+    "tensorflow": "2.21.0",
+    "numpy": "2.3.5",
+    "scikit-learn": "1.9.1",
+    "onnxruntime": "1.30.0"
+  },
+  "calibration": {
+    "raw_brier": 0.17876756191253662,
+    "platt_brier": 0.03116248920559883,
+    "isotonic_brier": 0.014227598905563354,
+    "chosen": "isotonic"
+  },
+  "calibration_scenarios": [
+    13
+  ],
+  "ece_raw_test": 0.3098283271692107,
+  "ece_calibrated_test": 0.07968122056064368
+}

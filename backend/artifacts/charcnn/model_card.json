@@ -1,0 +1,120 @@
+{
+  "name": "charcnn_dns",
+  "display_name": "Char-CNN DNS Threat Detector",
+  "version": "5.0.0",
+  "type": "classification",
+  "framework": "onnx",
+  "architecture": "HybridNet_v4 (Multi-scale CNN + BiGRU + Lexical Gating)",
+  "parameters": 943923,
+  "source_dataset": "DNS Threats multiclass dataset (Benign + DGA + DNS Tunnel)",
+  "training_date": "2026-10-04",
+  "model_file": "uniguard_charcnn.onnx",
+  "external_data_file": "uniguard_charcnn.onnx.data",
+  "opset_version": 14,
+
+  "inputs": [
+    {
+      "name": "token_ids",
+      "dtype": "int64",
+      "shape": [-1, 128],
+      "description": "Character token IDs (PAD=0, UNK=1, vocab chars at indices 2-40)"
+    },
+    {
+      "name": "lexical_features",
+      "dtype": "float32",
+      "shape": [-1, 18],
+      "description": "18 handcrafted lexical features, z-score normalized via feature_stats.npz"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "probabilities",
+      "dtype": "float32",
+      "shape": [-1, 3],
+      "description": "Calibrated softmax probabilities [benign, dga, dns_tunnel]"
+    }
+  ],
+
+  "labels": {
+    "0": "benign",
+    "1": "dga",
+    "2": "dns_tunnel"
+  },
+
+  "vocab": {
+    "pad_token": 0,
+    "unk_token": 1,
+    "chars": "abcdefghijklmnopqrstuvwxyz0123456789-_.",
+    "vocab_size": 41
+  },
+
+  "preprocessing": {
+    "max_len": 128,
+    "steps": [
+      "Strip whitespace",
+      "Remove protocol prefix and port suffix",
+      "Lowercase",
+      "Punycode encode if non-ASCII",
+      "Strip trailing root dot",
+      "Collapse consecutive dots",
+      "Clip to 253 chars (RFC 1035)",
+      "Tokenize with CHAR2IDX (PAD=0, UNK=1, chars+2)",
+      "Pad/truncate to 128 tokens",
+      "Extract 18 lexical features",
+      "Z-score normalize features using feature_stats.npz (mean, std)"
+    ],
+    "feature_order": [
+      "length", "log_len", "entropy", "norm_entropy",
+      "digit_ratio", "alpha_ratio", "vowel_ratio", "max_consonant_run",
+      "sep_ratio", "unique_char_ratio", "n_labels", "max_label_len",
+      "mean_label_len", "hex_fraction", "base32_fraction", "base64_fraction",
+      "dict_word_ratio", "subdomain_entropy"
+    ],
+    "normalization_file": "feature_stats.npz"
+  },
+
+  "calibration": {
+    "method": "temperature_scaling",
+    "temperature": 1.0124481916427612,
+    "embedded_in_onnx": true
+  },
+
+  "thresholds": {
+    "dga": 0.6551020408163265,
+    "dns_tunnel": 0.1,
+    "notes": "Applied to class probability after softmax; if prob > threshold, classify as that class"
+  },
+
+  "validation_metrics": {
+    "test_samples": 10769,
+    "accuracy": 0.9321,
+    "macro_f1": 0.9199,
+    "per_class": {
+      "benign": { "precision": 0.9212, "recall": 0.9793, "f1": 0.9494, "support": 7000, "roc_auc": 0.9636, "pr_auc": 0.9774 },
+      "dga":    { "precision": 0.9150, "recall": 0.7269, "f1": 0.8102, "support": 2146, "roc_auc": 0.9482, "pr_auc": 0.8831 },
+      "dns_tunnel": { "precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 1623, "roc_auc": 1.0, "pr_auc": 1.0 }
+    },
+    "confusion_matrix": [[6855, 145, 0], [586, 1560, 0], [0, 0, 1623]],
+    "onnx_parity_max_diff": 3.58e-7,
+    "caveats": [
+      "DGA recall is 72.69% — some DGA families may be missed",
+      "Trained on query-side only; no response features available in diode",
+      "FPR at 95% TPR for DGA is 31.2% — use threshold-based classification"
+    ]
+  },
+
+  "mitre_mapping": {
+    "dga": { "id": "T1568.002", "name": "Dynamic Resolution: Domain Generation Algorithms" },
+    "dns_tunnel": { "id": "T1071.004", "name": "Application Layer Protocol: DNS" }
+  },
+
+  "benchmark": {
+    "hardware": "Intel CPU",
+    "batch_1_qps": 58.9,
+    "batch_64_qps": 361.3,
+    "batch_512_qps": 388.7,
+    "p50_ms_single": 16.77,
+    "p95_ms_single": 19.03,
+    "p99_ms_single": 24.20
+  }
+}

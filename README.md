@@ -167,41 +167,12 @@ Standard JSON with threat class, confidence, severity, MITRE ID, observability s
 
 ## 🚀 Getting Started
 
-> Replace the commands below with your real ones.
-
-### Prerequisites
-- Linux host with Python 3.10+
-- A receive-only TAP or data diode (or a `tcpreplay`/PCAP file for testing)
-- 4-core CPU, 8 GB RAM *(use the spec you actually tested on)*
-
-### Install
-```bash
-git clone https://github.com/<your-org>/uniguard.git
-cd uniguard
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-### Run on a PCAP (safe demo)
-```bash
-python -m uniguard.run --pcap samples/demo.pcap --out alerts/
-```
-
-### Run live on a receive-only interface
-```bash
-sudo ./scripts/harden_capture_nic.sh eth1   # no IP, egress drop, zero-TX check
-python -m uniguard.run --iface eth1 --out alerts/
-```
-
-### Launch the dashboard
-```bash
-python -m uniguard.dashboard
-```
-
-### Verify the evidence chain
-```bash
-python -m uniguard.verify alerts/ledger.jsonl
-```
+The runnable code in this repository is a Windows-hosted prototype with a
+React dashboard and an optional Kali/Linux private-lab flow sensor. Start with
+[`docs/PROTOTYPE_SETUP.md`](docs/PROTOTYPE_SETUP.md) for backend and frontend
+commands, then follow [`sensor/README.md`](sensor/README.md) to install and run
+the sensor. The backend analyzes only flow records sent to `POST /api/flows`;
+it does not generate or replay traffic itself.
 
 ## 📊 Results
 

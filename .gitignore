@@ -1,0 +1,27 @@
+# Python environments and generated files
+**/venv/
+**/.venv/
+**/__pycache__/
+*.py[cod]
+
+# Frontend dependencies and build output
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Local state and credentials
+backend/uniguard.db
+*.log
+.env
+.env.*
+!.env.example
+
+# Local model extraction, datasets, and archive bundles
+scratch/
+*.zip
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
