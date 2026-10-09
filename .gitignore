@@ -1,24 +1,26 @@
 # Python environments and generated files
 **/venv/
-**/.venv/
+**/.venv*/
 **/__pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # Frontend dependencies and build output
 **/node_modules/
 **/dist/
 **/dist-ssr/
 
-# Local state and credentials
-backend/uniguard.db
+# Local runtime state and credentials
+*.db
+*.sqlite
+*.sqlite3
 *.log
+*.db-*
 .env
 .env.*
 !.env.example
-
-# Local model extraction, datasets, and archive bundles
-scratch/
-*.zip
 
 # Editor and operating system files
 .vscode/

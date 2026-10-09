@@ -1,0 +1,9 @@
+{
+  "onnx_model_path": "outputs/uniguard_charcnn.onnx",
+  "opset_version": 14,
+  "max_abs_diff": 3.5762786865234375e-07,
+  "parity_verified": true,
+  "temperature": 1.0124481916427612,
+  "max_len": 128,
+  "num_features": 18
+}

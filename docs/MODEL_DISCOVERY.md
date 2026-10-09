@@ -7,13 +7,13 @@
 
 ## Summary of Discovered Models
 
-| # | Model | Source Zip | Format | Params | Dataset | Role |
-|---|-------|-----------|--------|--------|---------|------|
-| 1 | **Char-CNN DNS** (HybridNet_v4) | `CHAR-Cnn anti.zip` | ONNX (opset 14) | 943,923 | DNS Threats multiclass | DGA + DNS Tunnel detection from domain names |
-| 2 | **LightGBM Binary** | `newmodel.zip` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | Binary attack/benign flow classification |
-| 3 | **LightGBM Multi** | `newmodel.zip` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | 10-class attack type classification |
-| 4 | **Isolation Forest** | `newmodel.zip` | sklearn joblib | 300 trees | CIC-IDS2017 (benign only) | Unsupervised anomaly scoring |
-| 5 | **1D-CNN Beacon** | `training.zip` | ONNX (opset 13, tf2onnx) | 21,697 | CTU-13 | Botnet C2 beaconing from packet sequences |
+| # | Model | Retained source snapshot | Format | Params | Dataset | Role |
+|---|-------|-------------------------|--------|--------|---------|------|
+| 1 | **Char-CNN DNS** (HybridNet_v4) | `scratch/model_extract/charcnn/CHAR-Cnn anti/Char-Cnn/` | ONNX (opset 14) | 943,923 | DNS Threats multiclass | DGA + DNS Tunnel detection from domain names |
+| 2 | **LightGBM Binary** | `scratch/model_extract/newmodel/newmodel/` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | Binary attack/benign flow classification |
+| 3 | **LightGBM Multi** | `scratch/model_extract/newmodel/newmodel/` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | 10-class attack type classification |
+| 4 | **Isolation Forest** | `scratch/model_extract/newmodel/newmodel/` | sklearn joblib | 300 trees | CIC-IDS2017 (benign only) | Unsupervised anomaly scoring |
+| 5 | **1D-CNN Beacon** | `scratch/model_extract/training/training/` | ONNX (opset 13, tf2onnx) | 21,697 | CTU-13 | Botnet C2 beaconing from packet sequences |
 
 ---
 

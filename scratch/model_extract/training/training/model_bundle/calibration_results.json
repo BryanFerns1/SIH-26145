@@ -1,0 +1,40 @@
+{
+  "calibration_type": "isotonic",
+  "metrics": {
+    "raw_brier": 0.17876756191253662,
+    "platt_brier": 0.03116248920559883,
+    "isotonic_brier": 0.014227598905563354,
+    "chosen": "isotonic"
+  },
+  "thresholds": {
+    "HIGH": {
+      "score": 0.914893627166748,
+      "target_fpr": 0.002,
+      "achieved_fpr_cal": 0.004011107682813947,
+      "achieved_recall_cal": 0.9621418113365404,
+      "n_benign_cal": 3241,
+      "achieved_fpr_test": 0.03278688524590164,
+      "achieved_recall_test": 0.8593228421554602
+    },
+    "REVIEW": {
+      "score": 0.4285714030265808,
+      "target_fpr": 0.01,
+      "achieved_fpr_cal": 0.05738969453872261,
+      "achieved_recall_cal": 0.9943526458899812,
+      "n_benign_cal": 3241,
+      "achieved_fpr_test": 0.48587373561213815,
+      "achieved_recall_test": 0.9747257987601335
+    }
+  },
+  "n_calibration_flows": 8022,
+  "calibration_scenarios": [
+    13
+  ],
+  "n_test_flows": 11255,
+  "test_scenarios": [
+    8,
+    12
+  ],
+  "ece_raw_test": 0.3098283271692107,
+  "ece_calibrated_test": 0.07968122056064368
+}

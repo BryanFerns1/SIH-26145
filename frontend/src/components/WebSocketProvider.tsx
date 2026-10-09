@@ -21,7 +21,7 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
 
     const refreshAlerts = async () => {
       try {
-        const response = await fetch(apiUrl('/api/alerts?limit=100'))
+        const response = await fetch(apiUrl('/api/alerts?limit=100'), { headers: { 'x-uniguard-dashboard': '1' } })
         if (!response.ok) throw new Error(`Alert history request failed (${response.status})`)
         const result = await response.json() as { total: number; alerts: import('../store/useStore').Alert[] }
         if (!disposed) setRecentAlerts(result.alerts, result.total)
@@ -35,10 +35,10 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
 
     const refreshThroughput = async () => {
       try {
-        const response = await fetch(apiUrl('/api/metrics'))
+        const response = await fetch(apiUrl('/api/metrics'), { headers: { 'x-uniguard-dashboard': '1' } })
         if (!response.ok) throw new Error(`Throughput request failed (${response.status})`)
-        const result = await response.json() as { flows_per_sec: number; measurement_window_seconds: number }
-        if (!disposed) setThroughput(result.flows_per_sec, result.measurement_window_seconds)
+        const result = await response.json() as { flows_per_sec: number; measurement_window_seconds: number; total_detections?: number; total_alerts?: number }
+        if (!disposed) setThroughput(result.flows_per_sec, result.measurement_window_seconds, result.total_detections, result.total_alerts)
       } catch (error) {
         if (!disposed) setThroughput(0, 3)
         console.error('Unable to load UniGuard throughput:', error)

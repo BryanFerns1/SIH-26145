@@ -113,7 +113,15 @@ async def get_metrics():
         "flows_per_sec": flow_processor.get_throughput(),
         "measurement_window_seconds": flow_processor.flow_rate_window_seconds,
         "total_flows": flow_processor.total_flows,
+        "total_alerts": flow_processor.total_alerts,
+        "total_detections": flow_processor.total_alerts,
     }
+
+
+@app.post("/api/metrics/http-activity")
+async def report_http_activity(activity: dict[str, Any], x_sensor_key: str | None = Header(default=None)):
+    """Dummy endpoint to satisfy Vite frontend telemetry plugin."""
+    return {"accepted": True}
 
 
 @app.get("/api/alerts")

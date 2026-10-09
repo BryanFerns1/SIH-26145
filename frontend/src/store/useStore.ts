@@ -23,12 +23,13 @@ export interface PipelineMetrics {
   measurement_window_seconds?: number
   alerts_per_min: number
   dropped_records: number
-  models: { name: string; status: string; version: string; inference_count?: number; p50_ms?: number; p95_ms?: number; p99_ms?: number }[]
+  models: { name: string; status: string; version: string; inference_count?: number; p50_ms?: number; p95_ms?: number; p99_ms?: number; footprint_bytes?: number; drift_psi?: number | null; precision?: number | null; recall?: number | null }[]
 }
 
 interface AppState {
   alerts: Alert[]
   totalAlerts: number
+  totalDetections: number
   metrics: PipelineMetrics | null
   flowsPerSecond: number
   measurementWindowSeconds: number
@@ -36,13 +37,14 @@ interface AppState {
   addAlert: (alert: Alert) => void
   setRecentAlerts: (alerts: Alert[], total: number) => void
   setMetrics: (metrics: PipelineMetrics) => void
-  setThroughput: (flowsPerSecond: number, measurementWindowSeconds: number) => void
+  setThroughput: (flowsPerSecond: number, measurementWindowSeconds: number, totalDetections?: number, totalAlerts?: number) => void
   setIsConnected: (status: boolean) => void
 }
 
 export const useStore = create<AppState>((set) => ({
   alerts: [],
   totalAlerts: 0,
+  totalDetections: 0,
   metrics: null,
   flowsPerSecond: 0,
   measurementWindowSeconds: 3,
@@ -71,6 +73,11 @@ export const useStore = create<AppState>((set) => ({
   }),
   
   setMetrics: (metrics) => set({ metrics }),
-  setThroughput: (flowsPerSecond, measurementWindowSeconds) => set({ flowsPerSecond, measurementWindowSeconds }),
+  setThroughput: (flowsPerSecond, measurementWindowSeconds, totalDetections, totalAlerts) => set((state) => ({
+    flowsPerSecond,
+    measurementWindowSeconds,
+    ...(totalDetections != null ? { totalDetections } : {}),
+    ...(totalAlerts != null ? { totalAlerts: Math.max(totalAlerts, state.totalAlerts) } : {}),
+  })),
   setIsConnected: (status) => set({ isConnected: status }),
 }))
