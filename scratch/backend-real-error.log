@@ -1,0 +1,84 @@
+INFO:     Started server process [22884]
+INFO:     Waiting for application startup.
+2026-10-05 21:03:34,959 - uniguard - INFO - UniGuard Backend starting up...
+2026-10-05 21:03:34,974 - uniguard.ml - INFO - Discovered model metadata: beacon_cnn v1.0.0
+2026-10-05 21:03:34,976 - uniguard.ml - INFO - Discovered model metadata: charcnn_dns v5.0.0
+2026-10-05 21:03:34,977 - uniguard.ml - INFO - Discovered model metadata: lgbm_iforest v1.0.0
+2026-10-05 21:03:34,978 - uniguard.ml - INFO - Loading 3 models into registry...
+2026-10-05 21:03:34,979 - uniguard.ml - INFO - Loading Char-CNN DNS...
+2026-10-05 21:03:35,340 - uniguard.ml - INFO - Char-CNN DNS loaded successfully.
+2026-10-05 21:03:35,341 - uniguard.ml - INFO - Loading LightGBM & IForest...
+2026-10-05 21:03:38,030 - uniguard.ml - INFO - LightGBM & IForest loaded successfully.
+2026-10-05 21:03:38,031 - uniguard.ml - INFO - Loading Beacon 1D-CNN...
+2026-10-05 21:03:38,038 - uniguard.ml - INFO - Beacon 1D-CNN loaded successfully.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     ('127.0.0.1', 53855) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 64286) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 62291) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 55672) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 52373) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 54999) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 58489) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 61914) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 53896) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 58310) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 55178) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 49474) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 53774) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 59238) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 57542) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 55802) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 53915) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 64236) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 57310) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 60124) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 61828) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 52220) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 50498) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed

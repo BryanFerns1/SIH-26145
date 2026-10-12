@@ -1,0 +1,15 @@
+[
+  "tests/test_alert.py::test_alert_tamper_evidence",
+  "tests/test_alert.py::test_no_backward_ports",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_all_features_have_no_forbidden",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_base_features_have_no_forbidden",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_derived_features_all_start_with_d_prefix",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_forbidden_columns_are_actually_forbidden",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_forward_only_features_are_all_fwd_prefixed_or_neutral",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_no_raw_ip_or_port_in_features",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_prepare_rejects_forbidden_base_features",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_validate_columns_passes_forward",
+  "tests/test_forward_only.py::TestForwardOnlyGuarantee::test_validate_columns_raises_on_backward",
+  "tests/test_model.py::test_model_shapes",
+  "tests/test_split.py::test_time_block_split"
+]

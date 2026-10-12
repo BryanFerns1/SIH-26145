@@ -1,0 +1,7 @@
+{
+  "dga_threshold": 0.6551020408163265,
+  "tunnel_threshold": 0.1,
+  "macro_f1": 0.9212972075425151,
+  "baseline_argmax_f1": 0.919853137022054,
+  "use_thresholds": true
+}

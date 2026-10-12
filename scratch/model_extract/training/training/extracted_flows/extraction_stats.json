@@ -1,0 +1,72 @@
+{
+  "1": {
+    "total_flows": 4638,
+    "botnet_flows": 3420,
+    "benign_flows": 1218,
+    "unknown_flows": 0,
+    "family": "Neris"
+  },
+  "2": {
+    "total_flows": 14183,
+    "botnet_flows": 10865,
+    "benign_flows": 3318,
+    "unknown_flows": 0,
+    "family": "Neris"
+  },
+  "3": {
+    "total_flows": 11086,
+    "botnet_flows": 7817,
+    "benign_flows": 3269,
+    "unknown_flows": 0,
+    "family": "Rbot"
+  },
+  "4": {
+    "total_flows": 173,
+    "botnet_flows": 92,
+    "benign_flows": 81,
+    "unknown_flows": 0,
+    "family": "Rbot"
+  },
+  "5": {
+    "total_flows": 2702,
+    "botnet_flows": 1465,
+    "benign_flows": 1237,
+    "unknown_flows": 0,
+    "family": "Virut"
+  },
+  "6": {
+    "total_flows": 5309,
+    "botnet_flows": 4817,
+    "benign_flows": 492,
+    "unknown_flows": 0,
+    "family": "Menti"
+  },
+  "7": {
+    "total_flows": 140,
+    "botnet_flows": 87,
+    "benign_flows": 53,
+    "unknown_flows": 0,
+    "family": "Sogou"
+  },
+  "8": {
+    "total_flows": 9949,
+    "botnet_flows": 7595,
+    "benign_flows": 2354,
+    "unknown_flows": 0,
+    "family": "Murlo"
+  },
+  "12": {
+    "total_flows": 1306,
+    "botnet_flows": 793,
+    "benign_flows": 513,
+    "unknown_flows": 0,
+    "family": "NSIS.ay"
+  },
+  "13": {
+    "total_flows": 8022,
+    "botnet_flows": 4781,
+    "benign_flows": 3241,
+    "unknown_flows": 0,
+    "family": "Virut"
+  }
+}

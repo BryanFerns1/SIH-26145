@@ -1,0 +1,113 @@
+{
+  "name": "beacon_cnn",
+  "display_name": "1D-CNN Beacon/Botnet Detector",
+  "version": "1.0.0",
+  "type": "binary_classification",
+  "framework": "onnx",
+  "architecture": "1D CNN (3 conv blocks + BatchNorm + GlobalAvgPool + Dense, Keras via tf2onnx)",
+  "parameters": 21697,
+  "source_dataset": "CTU-13 (Botnet captures, scenarios 1-5 train, 6-7 val, 13 cal, 8+12 test)",
+  "training_date": "2026-10-04",
+  "model_file": "model.onnx",
+  "opset_version": 13,
+
+  "inputs": [
+    {
+      "name": "packet_seq",
+      "dtype": "float32",
+      "shape": [-1, 32, 7],
+      "description": "Packet sequence: 32 packets x 7 channels (log1p_pkt_size, log1p_iat_us, padding_mask, tcp_syn, tcp_fin, tcp_rst, tcp_psh)"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "output",
+      "dtype": "float32",
+      "shape": [-1, 1],
+      "description": "Sigmoid probability of botnet (before calibration)"
+    }
+  ],
+
+  "labels": {
+    "0": "benign",
+    "1": "botnet"
+  },
+
+  "preprocessing": {
+    "N": 32,
+    "channels": ["log1p_pkt_size", "log1p_iat_us", "padding_mask", "tcp_syn", "tcp_fin", "tcp_rst", "tcp_psh"],
+    "steps": [
+      "Take first 32 forward-direction packets",
+      "Channel 0: log1p(pkt_size_bytes) * pkt_size_log_scale",
+      "Channel 1: log1p(IAT_microseconds) * iat_log_scale (first pkt IAT=0, clip at iat_clip_us)",
+      "Channel 2: 1.0 for real packets, 0.0 for padding",
+      "Channel 3: 1.0 if TCP SYN flag (0x02)",
+      "Channel 4: 1.0 if TCP FIN flag (0x01)",
+      "Channel 5: 1.0 if TCP RST flag (0x04)",
+      "Channel 6: 1.0 if TCP PSH flag (0x08)",
+      "Pad remaining slots to 32 with zeros"
+    ],
+    "constants": {
+      "pkt_size_log_scale": 0.09090909090909091,
+      "iat_log_scale": 0.054288816503800214,
+      "iat_clip_us": 100000000.0
+    },
+    "notes": "All FIXED constants, no fitted scaler. Forward-direction packets ONLY."
+  },
+
+  "calibration": {
+    "method": "isotonic_regression",
+    "calibrator_file": "calibrator.pkl",
+    "raw_brier": 0.17877,
+    "calibrated_brier": 0.01423,
+    "ece_raw_test": 0.3098,
+    "ece_calibrated_test": 0.0797
+  },
+
+  "thresholds": {
+    "HIGH": {
+      "score": 0.914893627166748,
+      "target_fpr": 0.002,
+      "achieved_fpr_cal": 0.004,
+      "achieved_recall_cal": 0.962,
+      "achieved_fpr_test": 0.033,
+      "achieved_recall_test": 0.859
+    },
+    "REVIEW": {
+      "score": 0.4285714030265808,
+      "target_fpr": 0.01,
+      "achieved_fpr_cal": 0.057,
+      "achieved_recall_cal": 0.994,
+      "achieved_fpr_test": 0.486,
+      "achieved_recall_test": 0.975
+    }
+  },
+
+  "validation_metrics": {
+    "test_scenarios": [8, 12],
+    "precision": 0.9936,
+    "recall": 0.8379,
+    "f1": 0.9091,
+    "roc_auc": 0.9380,
+    "pr_auc": 0.9786,
+    "confusion_matrix": [[2822, 45], [1360, 7028]],
+    "caveats": [
+      "Test FPR at HIGH tier (3.3%) exceeds calibration FPR (0.4%) — domain shift between CTU-13 scenarios",
+      "REVIEW tier has high FPR on test (48.6%) — use HIGH tier for production alerts",
+      "Only trained on CTU-13 botnet captures; may not generalise to all C2 protocols",
+      "Recall on test set (83.8%) lower than on training set — expected generalisation gap"
+    ]
+  },
+
+  "benchmark": {
+    "hardware": "Intel 12-core CPU",
+    "onnx_batch_1_flows_per_sec": 14010,
+    "onnx_batch_256_flows_per_sec": 24917,
+    "onnx_batch_1024_flows_per_sec": 18239,
+    "onnx_p50_ms_single": 0.071
+  },
+
+  "mitre_mapping": {
+    "botnet": { "id": "T1071", "name": "Application Layer Protocol" }
+  }
+}

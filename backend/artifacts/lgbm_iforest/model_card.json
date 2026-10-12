@@ -1,0 +1,154 @@
+{
+  "name": "lgbm_iforest",
+  "display_name": "LightGBM Flow Classifier + Isolation Forest",
+  "version": "1.0.0",
+  "type": "classification_and_anomaly",
+  "framework": "lightgbm_native_text+sklearn_joblib",
+  "source_dataset": "CIC-IDS2017 Improved (Engelen/Rimmer/Joosen corrected labels)",
+  "training_date": "2026-10-04",
+
+  "models": {
+    "lgbm_binary": {
+      "file": "lgbm_binary.txt",
+      "format": "lightgbm_native_text",
+      "task": "binary_classification",
+      "output": "probability of attack (malicious)",
+      "labels": { "0": "BENIGN", "1": "ATTACK" },
+      "hyperparameters": {
+        "num_leaves": 63,
+        "max_depth": -1,
+        "min_child_samples": 50,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "learning_rate": 0.05,
+        "n_estimators": 2000
+      }
+    },
+    "lgbm_multi": {
+      "file": "lgbm_multi.txt",
+      "format": "lightgbm_native_text",
+      "task": "multiclass_classification",
+      "output": "probabilities for 10 classes",
+      "labels": {
+        "0": "BENIGN", "1": "Botnet", "2": "DDoS", "3": "DoS GoldenEye",
+        "4": "DoS Hulk", "5": "DoS Slow", "6": "FTP-Patator",
+        "7": "Portscan", "8": "SSH-Patator", "9": "Web Attack"
+      }
+    },
+    "iforest": {
+      "file": "iforest.joblib",
+      "format": "sklearn_joblib",
+      "task": "anomaly_detection",
+      "output": "anomaly score via -decision_function() (higher = more anomalous)",
+      "notes": "Trained on benign flows only. Input is log1p-transformed features.",
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_samples": 0.1,
+        "contamination": "auto"
+      }
+    },
+    "calibrator_binary": {
+      "file": "calibrator_binary.joblib",
+      "format": "sklearn_joblib",
+      "notes": "CalibratedClassifierCV wrapping LGBMWrapper binary"
+    },
+    "calibrator_multi": {
+      "file": "calibrator_multi.joblib",
+      "format": "sklearn_joblib",
+      "notes": "CalibratedClassifierCV wrapping LGBMWrapper multiclass"
+    }
+  },
+
+  "features": {
+    "total": 38,
+    "base_count": 28,
+    "derived_count": 10,
+    "constraint": "Forward-direction ONLY. No backward/bidirectional features.",
+    "base_features": [
+      "Flow Duration", "Total Fwd Packet", "Total Length of Fwd Packet",
+      "Fwd Packet Length Max", "Fwd Packet Length Min", "Fwd Packet Length Mean",
+      "Fwd Packet Length Std", "Fwd IAT Total", "Fwd IAT Mean", "Fwd IAT Std",
+      "Fwd IAT Max", "Fwd IAT Min", "Fwd PSH Flags", "Fwd URG Flags",
+      "Fwd RST Flags", "Fwd Header Length", "Fwd Packets/s",
+      "SYN Flag Count", "FIN Flag Count", "RST Flag Count",
+      "PSH Flag Count", "ACK Flag Count", "URG Flag Count",
+      "Subflow Fwd Packets", "Subflow Fwd Bytes", "FWD Init Win Bytes",
+      "Fwd Act Data Pkts", "Fwd Seg Size Min", "Fwd Segment Size Avg"
+    ],
+    "derived_features": [
+      "d_fwd_bytes_per_pkt", "d_fwd_hdr_per_pkt", "d_fwd_pkts_per_s",
+      "d_fwd_bytes_per_s", "d_fwd_iat_cv", "d_fwd_len_cv",
+      "d_fwd_len_range", "d_subflow_bytes_per_pkt", "d_fwd_hdr_ratio",
+      "d_fwd_active_ratio"
+    ],
+    "derived_formulas": {
+      "d_fwd_bytes_per_pkt": "Total Length of Fwd Packet / Total Fwd Packet",
+      "d_fwd_hdr_per_pkt": "Fwd Header Length / Total Fwd Packet",
+      "d_fwd_pkts_per_s": "Total Fwd Packet / (Flow Duration / 1e6)",
+      "d_fwd_bytes_per_s": "Total Length of Fwd Packet / (Flow Duration / 1e6)",
+      "d_fwd_iat_cv": "Fwd IAT Std / Fwd IAT Mean",
+      "d_fwd_len_cv": "Fwd Packet Length Std / Fwd Packet Length Mean",
+      "d_fwd_len_range": "Fwd Packet Length Max - Fwd Packet Length Min",
+      "d_subflow_bytes_per_pkt": "Subflow Fwd Bytes / Subflow Fwd Packets",
+      "d_fwd_hdr_ratio": "Fwd Header Length / Total Length of Fwd Packet",
+      "d_fwd_active_ratio": "Fwd Act Data Pkts / Total Fwd Packet"
+    },
+    "iforest_preprocessing": "log1p(clip(x, lower=0)) on ALL 38 features, fill NaN with 0"
+  },
+
+  "thresholds": {
+    "binary_high": {
+      "value": 0.14516129032258066,
+      "target_fpr": 0.002,
+      "description": "High-confidence alert threshold"
+    },
+    "binary_review": {
+      "value": 0.005563282336578581,
+      "target_fpr": 0.01,
+      "description": "Review-queue threshold"
+    },
+    "iforest_review": {
+      "value": 0.08472404543136625,
+      "target_fpr": 0.01,
+      "description": "IForest anomaly threshold"
+    }
+  },
+
+  "class_merge_map": {
+    "DoS Slowhttptest": "DoS Slow",
+    "DoS Slowloris": "DoS Slow",
+    "Web Attack - Brute Force": "Web Attack",
+    "Web Attack - XSS": "Web Attack",
+    "Web Attack - SQL Injection": "Web Attack",
+    "Infiltration - Portscan": "Portscan"
+  },
+
+  "rare_classes_excluded": ["Heartbleed", "Infiltration"],
+
+  "validation_metrics": {
+    "split": "Time-blocked (Train: Mon-Wed, Val: Thu, Test: Fri)",
+    "binary_high_tier": { "fpr": 0.0031, "recall": 0.9956, "precision": 0.999 },
+    "binary_review_tier": { "fpr": 0.0149, "recall": 0.9964, "precision": 0.999 },
+    "iforest_backstop": { "fpr": 0.0119, "recall_portscan": 0.787, "recall_ddos": 0.018 },
+    "throughput_1core": 13209,
+    "p99_latency_ms": 15.6,
+    "caveats": [
+      "IForest only catches portscan reliably as 0-day; DDoS/Botnet require L2",
+      "Trained on CIC-IDS2017 only; cross-dataset (CIC-IDS2018) NOT tested",
+      "Data exfiltration and DNS tunnelling NOT covered (no labels in dataset)",
+      "Flow Duration is in microseconds in CIC-IDS2017"
+    ]
+  },
+
+  "mitre_mapping": {
+    "DoS Hulk": "T1498.001",
+    "DoS GoldenEye": "T1498.001",
+    "DoS Slow": "T1499.002",
+    "DDoS": "T1498",
+    "Portscan": "T1046",
+    "FTP-Patator": "T1110.001",
+    "SSH-Patator": "T1110.001",
+    "Web Attack": "T1190",
+    "Botnet": "T1071.001"
+  }
+}

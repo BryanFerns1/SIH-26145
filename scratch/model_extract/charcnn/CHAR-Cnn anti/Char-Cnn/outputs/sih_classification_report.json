@@ -1,0 +1,74 @@
+{
+  "classification_report": {
+    "benign": {
+      "precision": 0.9212471442010483,
+      "recall": 0.9792857142857143,
+      "f1-score": 0.9493802368257046,
+      "support": 7000.0
+    },
+    "dga": {
+      "precision": 0.9149560117302052,
+      "recall": 0.7269338303821062,
+      "f1-score": 0.810179174240457,
+      "support": 2146.0
+    },
+    "dns_tunnel": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1623.0
+    },
+    "accuracy": 0.9321199739994428,
+    "macro avg": {
+      "precision": 0.9454010519770845,
+      "recall": 0.9020731815559402,
+      "f1-score": 0.919853137022054,
+      "support": 10769.0
+    },
+    "weighted avg": {
+      "precision": 0.9318623466041749,
+      "recall": 0.9321199739994428,
+      "f1-score": 0.9292697711672349,
+      "support": 10769.0
+    }
+  },
+  "accuracy": 0.9321199739994428,
+  "macro_f1": 0.919853137022054,
+  "advanced_metrics": {
+    "roc_auc": {
+      "benign": 0.9636255543342302,
+      "dga": 0.9481879396862181,
+      "dns_tunnel": 1.0
+    },
+    "pr_auc": {
+      "benign": 0.9774058902105736,
+      "dga": 0.883068958946849,
+      "dns_tunnel": 1.0
+    },
+    "fpr_at_95_tpr": {
+      "benign": 0.13611037410453702,
+      "dga": 0.31230430244694424,
+      "dns_tunnel": 0.0
+    },
+    "macro_roc_auc": 0.970604498006816,
+    "macro_pr_auc": 0.9534916163858075
+  },
+  "confusion_matrix": [
+    [
+      6855,
+      145,
+      0
+    ],
+    [
+      586,
+      1560,
+      0
+    ],
+    [
+      0,
+      0,
+      1623
+    ]
+  ],
+  "test_samples": 10769
+}

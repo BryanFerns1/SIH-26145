@@ -1,0 +1,19 @@
+2026-10-04 00:37:09,480 [INFO] Loading training split...
+2026-10-04 00:37:09,642 [INFO] Loaded train: 963,503 rows
+2026-10-04 00:37:09,645 [INFO] Loading validation split...
+2026-10-04 00:37:09,677 [INFO] Loaded val: 173,913 rows
+2026-10-04 00:37:09,680 [INFO] 
+=== Training Binary Model ===
+2026-10-04 00:37:09,689 [INFO] Train split: 963,503 rows (171,672 attacks, 791,831 benign)
+2026-10-04 00:37:09,690 [INFO] Val split:   173,913 rows (27,270 attacks, 146,643 benign)
+2026-10-04 00:37:44,140 [INFO] Binary model trained in 34.4s
+2026-10-04 00:37:44,140 [INFO] Best iteration: 175
+2026-10-04 00:37:44,160 [INFO] Saved binary model to C:\Users\soura\Downloads\newmodel\models\lgbm_binary.txt
+2026-10-04 00:37:44,165 [INFO] 
+=== Training Multiclass Model ===
+2026-10-04 00:37:44,389 [INFO] Train split: 963,475 rows, 10 classes
+2026-10-04 00:39:44,604 [INFO] Multiclass model trained in 120.1s
+2026-10-04 00:39:44,604 [INFO] Best iteration: 109
+2026-10-04 00:39:44,646 [INFO] Saved multiclass model to C:\Users\soura\Downloads\newmodel\models\lgbm_multi.txt
+2026-10-04 00:39:44,659 [INFO] Updated meta.json
+2026-10-04 00:39:44,660 [INFO] LightGBM training complete.

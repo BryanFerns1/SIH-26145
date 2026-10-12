@@ -1,0 +1,619 @@
+{
+  "E3": {
+    "experiment": "E3_leave_family_out",
+    "families": {
+      "Neris": {
+        "n_positive": 14285,
+        "n_negative": 4536,
+        "precision": 0.8523303794899547,
+        "recall": 0.8820441022051102,
+        "f1": 0.8669327095087381,
+        "roc_auc": 0.7221563161491408,
+        "pr_auc": 0.8596411693120742,
+        "confusion_matrix": [
+          [
+            2353,
+            2183
+          ],
+          [
+            1685,
+            12600
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "1": {
+            "n_positive": 3420,
+            "n_negative": 1218,
+            "precision": 0.8747721947409529,
+            "recall": 0.9824561403508771,
+            "f1": 0.9254923564247349,
+            "roc_auc": 0.9507799671592775,
+            "pr_auc": 0.9798939409104892,
+            "confusion_matrix": [
+              [
+                737,
+                481
+              ],
+              [
+                60,
+                3360
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 1,
+            "family": "Neris"
+          },
+          "2": {
+            "n_positive": 10865,
+            "n_negative": 3318,
+            "precision": 0.8444525680862731,
+            "recall": 0.8504371836171192,
+            "f1": 0.847434310083918,
+            "roc_auc": 0.6606052082561837,
+            "pr_auc": 0.7840960379650723,
+            "confusion_matrix": [
+              [
+                1616,
+                1702
+              ],
+              [
+                1625,
+                9240
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 2,
+            "family": "Neris"
+          }
+        }
+      },
+      "Rbot": {
+        "n_positive": 7909,
+        "n_negative": 3350,
+        "precision": 0.9091443347437705,
+        "recall": 0.9779997471235301,
+        "f1": 0.9423158920631053,
+        "roc_auc": 0.9909970692749427,
+        "pr_auc": 0.9956122473225631,
+        "confusion_matrix": [
+          [
+            2577,
+            773
+          ],
+          [
+            174,
+            7735
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "3": {
+            "n_positive": 7817,
+            "n_negative": 3269,
+            "precision": 0.9088433763466319,
+            "recall": 0.9820903159779967,
+            "f1": 0.9440482046237088,
+            "roc_auc": 0.9922749176804536,
+            "pr_auc": 0.9961134244790111,
+            "confusion_matrix": [
+              [
+                2499,
+                770
+              ],
+              [
+                140,
+                7677
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 3,
+            "family": "Rbot"
+          },
+          "4": {
+            "n_positive": 92,
+            "n_negative": 81,
+            "precision": 0.9508196721311475,
+            "recall": 0.6304347826086957,
+            "f1": 0.7581699346405228,
+            "roc_auc": 0.9498121309715513,
+            "pr_auc": 0.963496431464375,
+            "confusion_matrix": [
+              [
+                78,
+                3
+              ],
+              [
+                34,
+                58
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 4,
+            "family": "Rbot"
+          }
+        }
+      },
+      "Virut": {
+        "n_positive": 6246,
+        "n_negative": 4478,
+        "precision": 0.9359819848801673,
+        "recall": 0.9316362471982068,
+        "f1": 0.9338040600176523,
+        "roc_auc": 0.9488261500312412,
+        "pr_auc": 0.9736838331451363,
+        "confusion_matrix": [
+          [
+            4080,
+            398
+          ],
+          [
+            427,
+            5819
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "5": {
+            "n_positive": 1465,
+            "n_negative": 1237,
+            "precision": 0.8400566171266808,
+            "recall": 0.8102389078498293,
+            "f1": 0.8248783877692842,
+            "roc_auc": 0.8644664924773964,
+            "pr_auc": 0.9114951190779937,
+            "confusion_matrix": [
+              [
+                1011,
+                226
+              ],
+              [
+                278,
+                1187
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 5,
+            "family": "Virut"
+          },
+          "13": {
+            "n_positive": 4781,
+            "n_negative": 3241,
+            "precision": 0.9641965029142381,
+            "recall": 0.9688349717632294,
+            "f1": 0.9665101721439749,
+            "roc_auc": 0.9792861295750477,
+            "pr_auc": 0.9899426851208679,
+            "confusion_matrix": [
+              [
+                3069,
+                172
+              ],
+              [
+                149,
+                4632
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 13,
+            "family": "Virut"
+          }
+        }
+      },
+      "Menti": {
+        "n_positive": 4817,
+        "n_negative": 492,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.9945708036071434,
+        "pr_auc": 0.9994417561893754,
+        "confusion_matrix": [
+          [
+            492,
+            0
+          ],
+          [
+            4817,
+            0
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "6": {
+            "n_positive": 4817,
+            "n_negative": 492,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "roc_auc": 0.9945708036071434,
+            "pr_auc": 0.9994417561893754,
+            "confusion_matrix": [
+              [
+                492,
+                0
+              ],
+              [
+                4817,
+                0
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 6,
+            "family": "Menti"
+          }
+        }
+      },
+      "Sogou": {
+        "n_positive": 87,
+        "n_negative": 53,
+        "precision": 0.927536231884058,
+        "recall": 0.735632183908046,
+        "f1": 0.8205128205128205,
+        "roc_auc": 0.9218173931901974,
+        "pr_auc": 0.9547601100960066,
+        "confusion_matrix": [
+          [
+            48,
+            5
+          ],
+          [
+            23,
+            64
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "7": {
+            "n_positive": 87,
+            "n_negative": 53,
+            "precision": 0.927536231884058,
+            "recall": 0.735632183908046,
+            "f1": 0.8205128205128205,
+            "roc_auc": 0.9218173931901974,
+            "pr_auc": 0.9547601100960066,
+            "confusion_matrix": [
+              [
+                48,
+                5
+              ],
+              [
+                23,
+                64
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 7,
+            "family": "Sogou"
+          }
+        }
+      },
+      "Murlo": {
+        "n_positive": 7595,
+        "n_negative": 2354,
+        "precision": 1.0,
+        "recall": 0.30072416063199475,
+        "f1": 0.4623949792489118,
+        "roc_auc": 0.9189163543291629,
+        "pr_auc": 0.9767306728088839,
+        "confusion_matrix": [
+          [
+            2354,
+            0
+          ],
+          [
+            5311,
+            2284
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "8": {
+            "n_positive": 7595,
+            "n_negative": 2354,
+            "precision": 1.0,
+            "recall": 0.30072416063199475,
+            "f1": 0.4623949792489118,
+            "roc_auc": 0.9189163543291629,
+            "pr_auc": 0.9767306728088839,
+            "confusion_matrix": [
+              [
+                2354,
+                0
+              ],
+              [
+                5311,
+                2284
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 8,
+            "family": "Murlo"
+          }
+        }
+      },
+      "NSIS.ay": {
+        "n_positive": 793,
+        "n_negative": 513,
+        "precision": 0.9392338177014531,
+        "recall": 0.8965952080706179,
+        "f1": 0.9174193548387096,
+        "roc_auc": 0.9666895275178278,
+        "pr_auc": 0.9789639175404473,
+        "confusion_matrix": [
+          [
+            467,
+            46
+          ],
+          [
+            82,
+            711
+          ]
+        ],
+        "statistically_weak": false,
+        "per_scenario": {
+          "12": {
+            "n_positive": 793,
+            "n_negative": 513,
+            "precision": 0.9392338177014531,
+            "recall": 0.8965952080706179,
+            "f1": 0.9174193548387096,
+            "roc_auc": 0.9666895275178278,
+            "pr_auc": 0.9789639175404473,
+            "confusion_matrix": [
+              [
+                467,
+                46
+              ],
+              [
+                82,
+                711
+              ]
+            ],
+            "statistically_weak": false,
+            "scenario_id": 12,
+            "family": "NSIS.ay"
+          }
+        }
+      }
+    }
+  },
+  "E5": {
+    "experiment": "E5_evasion_feature_level",
+    "note": "Feature-level perturbation, NOT PCAP-level",
+    "results": {
+      "baseline": {
+        "n_positive": 8388,
+        "n_negative": 2867,
+        "precision": 0.9981378026070763,
+        "recall": 0.8307105388650453,
+        "f1": 0.9067603617671937,
+        "roc_auc": 0.9569551748898348,
+        "pr_auc": 0.983919455530446,
+        "confusion_matrix": [
+          [
+            2854,
+            13
+          ],
+          [
+            1420,
+            6968
+          ]
+        ],
+        "statistically_weak": false
+      },
+      "perturbations": {
+        "pad_0_50": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9984140715109573,
+          "recall": 0.8255841678588459,
+          "f1": 0.9038110154006787,
+          "roc_auc": 0.9543495125412939,
+          "pr_auc": 0.9856156859618306,
+          "confusion_matrix": [
+            [
+              2856,
+              11
+            ],
+            [
+              1463,
+              6925
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.005126371006199393
+        },
+        "pad_0_200": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9993550467591099,
+          "recall": 0.7389127324749643,
+          "f1": 0.8496230294722412,
+          "roc_auc": 0.9547060228050137,
+          "pr_auc": 0.9859311206692498,
+          "confusion_matrix": [
+            [
+              2863,
+              4
+            ],
+            [
+              2190,
+              6198
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.09179780639008106
+        },
+        "pad_0_500": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 1.0,
+          "recall": 0.586552217453505,
+          "f1": 0.739404869251578,
+          "roc_auc": 0.952735600328604,
+          "pr_auc": 0.9853159795611186,
+          "confusion_matrix": [
+            [
+              2867,
+              0
+            ],
+            [
+              3468,
+              4920
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.24415832141154026
+        },
+        "pad_0_1000": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9992464204973625,
+          "recall": 0.31616595135908443,
+          "f1": 0.4803477630863974,
+          "roc_auc": 0.9427709440579737,
+          "pr_auc": 0.9814967538793886,
+          "confusion_matrix": [
+            [
+              2865,
+              2
+            ],
+            [
+              5736,
+              2652
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.5145445875059609
+        },
+        "jitter_1e+03": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9978411053540587,
+          "recall": 0.8265379113018598,
+          "f1": 0.9041471048513302,
+          "roc_auc": 0.9541377312649042,
+          "pr_auc": 0.9830626769506713,
+          "confusion_matrix": [
+            [
+              2852,
+              15
+            ],
+            [
+              1455,
+              6933
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.0041726275631854826
+        },
+        "jitter_1e+04": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9969280280866003,
+          "recall": 0.8124701955174058,
+          "f1": 0.8952968996321597,
+          "roc_auc": 0.9469612859003154,
+          "pr_auc": 0.9809784855856282,
+          "confusion_matrix": [
+            [
+              2846,
+              21
+            ],
+            [
+              1573,
+              6815
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.018240343347639465
+        },
+        "jitter_1e+05": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9962725510660504,
+          "recall": 0.7966142107773009,
+          "f1": 0.8853262669758198,
+          "roc_auc": 0.9404412668520595,
+          "pr_auc": 0.9788079091922735,
+          "confusion_matrix": [
+            [
+              2842,
+              25
+            ],
+            [
+              1706,
+              6682
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.03409632808774443
+        },
+        "jitter_1e+06": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9930186674760966,
+          "recall": 0.7800429184549357,
+          "f1": 0.8737397342591975,
+          "roc_auc": 0.935774510699175,
+          "pr_auc": 0.9767063431553564,
+          "confusion_matrix": [
+            [
+              2821,
+              46
+            ],
+            [
+              1845,
+              6543
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.05066762041010964
+        },
+        "both_pad0_200_jit1e+04": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9991526859854262,
+          "recall": 0.7029089175011922,
+          "f1": 0.8252501924557352,
+          "roc_auc": 0.9467359278348543,
+          "pr_auc": 0.9834391263711265,
+          "confusion_matrix": [
+            [
+              2862,
+              5
+            ],
+            [
+              2492,
+              5896
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.1278016213638531
+        },
+        "both_pad0_500_jit1e+05": {
+          "n_positive": 8388,
+          "n_negative": 2867,
+          "precision": 0.9995385325334564,
+          "recall": 0.5164520743919886,
+          "f1": 0.6810249960698004,
+          "roc_auc": 0.934427684906719,
+          "pr_auc": 0.9793303962776796,
+          "confusion_matrix": [
+            [
+              2865,
+              2
+            ],
+            [
+              4056,
+              4332
+            ]
+          ],
+          "statistically_weak": false,
+          "recall_degradation": 0.3142584644730567
+        }
+      }
+    }
+  }
+}

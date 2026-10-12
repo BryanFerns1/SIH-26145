@@ -1,0 +1,20 @@
+{
+  "total_rows": 2482810,
+  "columns": [
+    "domain",
+    "class"
+  ],
+  "class_distribution": {
+    "benign": 944106,
+    "dga": 1532263,
+    "dns_tunnel": 6441
+  },
+  "duplicate_domains": 117904,
+  "conflicting_labels": 100,
+  "non_ascii": 0,
+  "trailing_dots": 0,
+  "punycode": 1817,
+  "has_family_col": false,
+  "has_source_col": false,
+  "sha256": "9bc7c1e53d67c2b5ad9352a45bc415107521da10e96572d0ed5e4586b80e4de9"
+}

@@ -1,0 +1,26 @@
+{
+  "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+  "cores": 12,
+  "batch_sizes": {
+    "1": {
+      "onnx_mean_ms": 0.07137999982660403,
+      "onnx_flows_per_sec": 14009.52651203692,
+      "keras_mean_ms": 59.97881499979485,
+      "keras_flows_per_sec": 16.672553467477147
+    },
+    "256": {
+      "onnx_mean_ms": 10.274104999916744,
+      "onnx_flows_per_sec": 24917.012236304232,
+      "keras_mean_ms": 113.59064500002205,
+      "keras_flows_per_sec": 2253.7067203021015
+    },
+    "1024": {
+      "onnx_mean_ms": 56.14403499994296,
+      "onnx_flows_per_sec": 18238.803107062762,
+      "keras_mean_ms": 76.4122699998552,
+      "keras_flows_per_sec": 13400.989134362066
+    }
+  },
+  "target_5000_met": false,
+  "onnx_best_flows_per_sec": 0
+}

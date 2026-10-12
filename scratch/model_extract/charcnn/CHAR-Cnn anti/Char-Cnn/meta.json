@@ -1,0 +1,71 @@
+{
+  "project": "UniGuard Char-CNN DNS Threat Detector",
+  "challenge": "Smart India Hackathon 2026 (SIH26145)",
+  "team": "CeaserX",
+  "version": "5.0.0",
+  "vocab": {
+    "pad_token": 0,
+    "unk_token": 1,
+    "chars": "abcdefghijklmnopqrstuvwxyz0123456789-_.",
+    "vocab_size": 41
+  },
+  "classes": {
+    "benign": 0,
+    "dga": 1,
+    "dns_tunnel": 2
+  },
+  "inverse_classes": {
+    "0": "benign",
+    "1": "dga",
+    "2": "dns_tunnel"
+  },
+  "mitre_attack": {
+    "benign": {
+      "technique_id": "N/A",
+      "technique_name": "Benign / Normal Resolution",
+      "tactic": "None"
+    },
+    "dga": {
+      "technique_id": "T1568.002",
+      "technique_name": "Dynamic Resolution: Domain Generation Algorithms",
+      "tactic": "Command and Control"
+    },
+    "dns_tunnel": {
+      "technique_id": "T1071.004",
+      "technique_name": "Application Layer Protocol: DNS",
+      "tactic": "Command and Control / Exfiltration"
+    }
+  },
+  "constraints": {
+    "unidirectional_tap": true,
+    "query_side_only": true,
+    "no_response_features": true,
+    "max_fqdn_length": 253,
+    "max_label_length": 63,
+    "model_max_len": 128
+  },
+  "features": {
+    "num_features": 18,
+    "names": [
+      "length",
+      "log_len",
+      "entropy",
+      "norm_entropy",
+      "digit_ratio",
+      "alpha_ratio",
+      "vowel_ratio",
+      "max_consonant_run",
+      "sep_ratio",
+      "unique_char_ratio",
+      "n_labels",
+      "max_label_len",
+      "mean_label_len",
+      "hex_fraction",
+      "base32_fraction",
+      "base64_fraction",
+      "dict_word_ratio",
+      "subdomain_entropy"
+    ]
+  },
+  "dataset_sha256": "9bc7c1e53d67c2b5ad9352a45bc415107521da10e96572d0ed5e4586b80e4de9"
+}

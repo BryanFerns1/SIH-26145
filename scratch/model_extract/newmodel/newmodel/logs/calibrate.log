@@ -1,0 +1,31 @@
+2026-10-04 00:42:54,889 [INFO] Loading calibration split...
+2026-10-04 00:42:54,933 [INFO] Loaded cal: 99,946 rows
+2026-10-04 00:42:54,937 [INFO] Loading test split for immediate FPR/Recall reporting...
+2026-10-04 00:42:54,975 [INFO] Loaded test: 288,796 rows
+2026-10-04 00:42:54,979 [INFO] 
+=== Binary Calibration ===
+2026-10-04 00:42:55,165 [INFO] Base Brier Score: 0.00156
+2026-10-04 00:42:55,508 [INFO] Platt (Sigmoid) Brier Score: 0.00122
+2026-10-04 00:42:55,804 [INFO] Isotonic Brier Score: 0.00113
+2026-10-04 00:42:55,804 [INFO] Selected Method: Isotonic
+2026-10-04 00:42:55,833 [INFO] Saved binary calibrator to C:\Users\soura\Downloads\newmodel\models\calibrator_binary.joblib
+2026-10-04 00:42:56,048 [INFO] Saved reliability diagram to C:\Users\soura\Downloads\newmodel\reports\reliability_binary.png
+2026-10-04 00:42:56,442 [INFO]   HIGH Threshold (Target FPR 0.0020):
+2026-10-04 00:42:56,442 [INFO]     Value:       0.145161
+2026-10-04 00:42:56,445 [INFO]     Actual Test FPR:  0.003165 (756 / 238826 benigns)
+2026-10-04 00:42:56,448 [INFO]     Test Recall:      0.9956 (49748 / 49970 attacks)
+2026-10-04 00:42:56,448 [INFO]   REVIEW Threshold (Target FPR 0.0100):
+2026-10-04 00:42:56,448 [INFO]     Value:       0.005563
+2026-10-04 00:42:56,451 [INFO]     Actual Test FPR:  0.014915 (3562 / 238826 benigns)
+2026-10-04 00:42:56,453 [INFO]     Test Recall:      0.9964 (49788 / 49970 attacks)
+2026-10-04 00:42:56,454 [INFO] 
+=== Multiclass Calibration ===
+2026-10-04 00:42:56,484 [WARNING] Classes missing from CAL split (indices {8}). Bypassing scikit-learn calibration for multiclass.
+2026-10-04 00:42:56,526 [INFO] Saved multiclass calibrator to C:\Users\soura\Downloads\newmodel\models\calibrator_multi.joblib
+2026-10-04 00:42:56,526 [INFO] 
+=== Isolation Forest Thresholds ===
+2026-10-04 00:42:58,463 [INFO]   Anomaly Threshold (Target FPR 0.0100):
+2026-10-04 00:42:58,463 [INFO]     Value:       0.084724
+2026-10-04 00:43:03,426 [INFO]     Actual Test FPR:  0.011921 (2847 / 238826 benigns)
+2026-10-04 00:43:03,434 [INFO] 
+Updated meta.json with thresholds and calibrators.

@@ -1,0 +1,194 @@
+{
+  "data_source": "CIC-IDS2017-improved (Engelen et al. corrected labels)",
+  "files": {
+    "monday": {
+      "path": "C:\\Users\\soura\\Downloads\\CICIDS2017_improved\\monday.csv",
+      "size_bytes": 207875155,
+      "size_mb": 207.88,
+      "sha256": "51fe5dc962626efb4ae70dce0303072fb780da0932822b651202ee9c2fbc1aff"
+    },
+    "tuesday": {
+      "path": "C:\\Users\\soura\\Downloads\\CICIDS2017_improved\\tuesday.csv",
+      "size_bytes": 178397720,
+      "size_mb": 178.4,
+      "sha256": "e2a0a5b631dfc6b455cc9f9a88b944110637d70a7f74171473925f76f38b6b0c"
+    },
+    "wednesday": {
+      "path": "C:\\Users\\soura\\Downloads\\CICIDS2017_improved\\wednesday.csv",
+      "size_bytes": 291290505,
+      "size_mb": 291.29,
+      "sha256": "bf46c5f3c792e8817381f724511229569606918eaf07ac986d7a2592b6341bc2"
+    },
+    "thursday": {
+      "path": "C:\\Users\\soura\\Downloads\\CICIDS2017_improved\\thursday.csv",
+      "size_bytes": 189519159,
+      "size_mb": 189.52,
+      "sha256": "78a4d11eaf473d099e30e71ddb01e0f38218e844c0a9cdd36602145d674af482"
+    },
+    "friday": {
+      "path": "C:\\Users\\soura\\Downloads\\CICIDS2017_improved\\friday.csv",
+      "size_bytes": 285188226,
+      "size_mb": 285.19,
+      "sha256": "ebd499e6f23bd59f9cb81bec28178491b02b925fa5640a24215c9437d79482d0"
+    }
+  },
+  "attempted_rows": "DROPPED",
+  "label_merge": {
+    "DoS Slowhttptest": "DoS Slow",
+    "DoS Slowloris": "DoS Slow",
+    "Web Attack - Brute Force": "Web Attack",
+    "Web Attack - XSS": "Web Attack",
+    "Web Attack - SQL Injection": "Web Attack",
+    "Infiltration - Portscan": "Portscan"
+  },
+  "rare_classes": [
+    "Heartbleed",
+    "Infiltration"
+  ],
+  "classes": [
+    "BENIGN",
+    "Botnet",
+    "DDoS",
+    "DoS GoldenEye",
+    "DoS Hulk",
+    "DoS Slow",
+    "FTP-Patator",
+    "Portscan",
+    "SSH-Patator",
+    "Web Attack"
+  ],
+  "not_met_classes": {
+    "Data Exfiltration": "No labelled captures available in CIC-IDS2017",
+    "DNS Tunnelling": "No labelled captures available in CIC-IDS2017"
+  },
+  "train_days": [
+    "monday",
+    "tuesday",
+    "wednesday"
+  ],
+  "val_days": [
+    "thursday"
+  ],
+  "test_days": [
+    "friday"
+  ],
+  "day_label_counts": {
+    "monday": {
+      "total": 350579,
+      "labels": {
+        "BENIGN": 350579
+      }
+    },
+    "tuesday": {
+      "total": 296907,
+      "labels": {
+        "BENIGN": 289974,
+        "FTP-Patator": 3972,
+        "SSH-Patator": 2961
+      }
+    },
+    "wednesday": {
+      "total": 453585,
+      "labels": {
+        "BENIGN": 282356,
+        "DoS Hulk": 158468,
+        "DoS GoldenEye": 7567,
+        "DoS Slow": 5183,
+        "Heartbleed": 11
+      }
+    },
+    "thursday": {
+      "total": 258745,
+      "labels": {
+        "BENIGN": 252480,
+        "Portscan": 6125,
+        "Web Attack": 104,
+        "Infiltration": 36
+      }
+    },
+    "friday": {
+      "total": 345205,
+      "labels": {
+        "BENIGN": 247753,
+        "DDoS": 95144,
+        "Portscan": 1572,
+        "Botnet": 736
+      }
+    }
+  },
+  "total_rows_after_processing": 1705021,
+  "total_rows_after_dedup": 1705021,
+  "feature_count": 39,
+  "features": [
+    "Flow Duration",
+    "Total Fwd Packet",
+    "Total Length of Fwd Packet",
+    "Fwd Packet Length Max",
+    "Fwd Packet Length Min",
+    "Fwd Packet Length Mean",
+    "Fwd Packet Length Std",
+    "Fwd IAT Total",
+    "Fwd IAT Mean",
+    "Fwd IAT Std",
+    "Fwd IAT Max",
+    "Fwd IAT Min",
+    "Fwd PSH Flags",
+    "Fwd URG Flags",
+    "Fwd RST Flags",
+    "Fwd Header Length",
+    "Fwd Packets/s",
+    "SYN Flag Count",
+    "FIN Flag Count",
+    "RST Flag Count",
+    "PSH Flag Count",
+    "ACK Flag Count",
+    "URG Flag Count",
+    "Subflow Fwd Packets",
+    "Subflow Fwd Bytes",
+    "FWD Init Win Bytes",
+    "Fwd Act Data Pkts",
+    "Fwd Seg Size Min",
+    "Fwd Segment Size Avg",
+    "d_fwd_bytes_per_pkt",
+    "d_fwd_hdr_per_pkt",
+    "d_fwd_pkts_per_s",
+    "d_fwd_bytes_per_s",
+    "d_fwd_iat_cv",
+    "d_fwd_len_cv",
+    "d_fwd_len_range",
+    "d_subflow_bytes_per_pkt",
+    "d_fwd_hdr_ratio",
+    "d_fwd_active_ratio"
+  ],
+  "base_features": [
+    "Flow Duration",
+    "Total Fwd Packet",
+    "Total Length of Fwd Packet",
+    "Fwd Packet Length Max",
+    "Fwd Packet Length Min",
+    "Fwd Packet Length Mean",
+    "Fwd Packet Length Std",
+    "Fwd IAT Total",
+    "Fwd IAT Mean",
+    "Fwd IAT Std",
+    "Fwd IAT Max",
+    "Fwd IAT Min",
+    "Fwd PSH Flags",
+    "Fwd URG Flags",
+    "Fwd RST Flags",
+    "Fwd Header Length",
+    "Fwd Packets/s",
+    "SYN Flag Count",
+    "FIN Flag Count",
+    "RST Flag Count",
+    "PSH Flag Count",
+    "ACK Flag Count",
+    "URG Flag Count",
+    "Subflow Fwd Packets",
+    "Subflow Fwd Bytes",
+    "FWD Init Win Bytes",
+    "Fwd Act Data Pkts",
+    "Fwd Seg Size Min",
+    "Fwd Segment Size Avg"
+  ]
+}

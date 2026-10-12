@@ -1,0 +1,72 @@
+# UniGuard — Passive One-Way Network Threat Intelligence Platform
+# Team CeaserX · SIH26145
+
+services:
+  # ── TimescaleDB ─────────────────────────────────────────────
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: uniguard-tsdb
+    environment:
+      POSTGRES_USER: uniguard
+      POSTGRES_PASSWORD: uniguard_sih2026
+      POSTGRES_DB: uniguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - tsdb_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uniguard"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── Redis ───────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: uniguard-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── Backend API + Workers ───────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: uniguard-backend
+    ports:
+      - "8000:8000"
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgresql+asyncpg://uniguard:uniguard_sih2026@timescaledb:5432/uniguard
+      ARTIFACTS_DIR: /app/artifacts
+      LOG_LEVEL: INFO
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+      timescaledb:
+        condition: service_healthy
+    command: >
+      uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --log-level info
+
+  # ── Frontend (dev) ─────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: uniguard-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  tsdb_data:

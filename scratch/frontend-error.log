@@ -1,0 +1,422 @@
+8:54:11 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+8:54:11 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:00:58 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:00:58 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:10:03 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:10:03 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:40:07 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:40:07 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:59:56 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:59:56 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:59:58 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+9:59:58 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+10:00:02 pm [vite] ws proxy error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+10:00:02 pm [vite] ws proxy socket error:
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+10:59:04 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:04 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:05 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:05 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:05 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:05 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:05 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:06 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:06 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:07 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:07 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:08 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:08 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:08 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:08 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:08 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:09 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:09 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:10 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:10 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:11 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:11 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:11 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:11 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:12 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:12 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:13 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:13 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:13 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:14 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:14 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:14 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:14 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:15 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:15 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:16 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:16 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:17 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:17 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:17 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:17 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:18 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:18 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:19 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:19 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:20 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:20 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:20 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:20 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:21 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:21 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:22 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:23 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:23 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:23 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:23 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:24 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:24 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:25 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:25 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:26 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:26 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:26 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:26 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:27 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:27 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:28 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:28 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:29 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:29 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:29 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:29 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:30 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:30 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:31 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:31 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:32 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:32 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:32 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:32 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:33 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:33 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:34 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:34 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:35 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:35 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:35 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:35 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:36 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:36 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:37 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:37 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:38 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:38 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:38 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:38 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:38 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:39 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:39 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:40 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:40 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:41 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:41 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:42 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:42 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:44 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:44 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:44 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:44 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:45 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:45 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:46 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:46 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:47 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:47 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:47 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:47 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:48 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:48 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:49 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:49 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:50 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:50 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:50 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:50 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:51 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:51 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:52 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:52 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:53 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:53 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:53 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:53 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:54 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:54 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:54 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:55 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:55 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+10:59:56 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:56 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+10:59:56 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+10:59:56 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+11:00:02 pm [vite] http proxy error: /api/metrics
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+11:00:02 pm [vite] http proxy error: /api/alerts?limit=100
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+11:00:02 pm [vite] (client) [console.error] Unable to load UniGuard throughput: Error: Throughput request failed (502)
+    at refreshThroughput (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:30:29)
+11:00:02 pm [vite] (client) [console.error] Unable to load UniGuard alert history: Error: Alert history request failed (502)
+    at refreshAlerts (http://localhost:5173/src/components/WebSocketProvider.tsx?t=1791219964195:18:29)
+11:00:10 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+11:00:26 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+11:00:42 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+11:00:58 pm [vite] ws proxy error:
+Error: connect ECONNREFUSED 127.0.0.1:8000
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
