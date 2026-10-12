@@ -7,13 +7,15 @@
 
 ## Summary of Discovered Models
 
-| # | Model | Source Zip | Format | Params | Dataset | Role |
+| # | Model | Deployed artifact | Format | Params | Dataset | Role |
 |---|-------|-----------|--------|--------|---------|------|
-| 1 | **Char-CNN DNS** (HybridNet_v4) | `CHAR-Cnn anti.zip` | ONNX (opset 14) | 943,923 | DNS Threats multiclass | DGA + DNS Tunnel detection from domain names |
-| 2 | **LightGBM Binary** | `newmodel.zip` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | Binary attack/benign flow classification |
-| 3 | **LightGBM Multi** | `newmodel.zip` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | 10-class attack type classification |
-| 4 | **Isolation Forest** | `newmodel.zip` | sklearn joblib | 300 trees | CIC-IDS2017 (benign only) | Unsupervised anomaly scoring |
-| 5 | **1D-CNN Beacon** | `training.zip` | ONNX (opset 13, tf2onnx) | 21,697 | CTU-13 | Botnet C2 beaconing from packet sequences |
+| 1 | **Char-CNN DNS** (HybridNet_v4) | `backend/artifacts/charcnn/uniguard_charcnn.onnx` | ONNX (opset 14) | 943,923 | DNS Threats multiclass | DGA + DNS Tunnel detection from domain names |
+| 2 | **LightGBM Binary** | `backend/artifacts/lgbm_iforest/lgbm_binary.txt` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | Binary attack/benign flow classification |
+| 3 | **LightGBM Multi** | `backend/artifacts/lgbm_iforest/lgbm_multi.txt` | LightGBM native text | N/A (tree) | CIC-IDS2017 Improved | 10-class attack type classification |
+| 4 | **Isolation Forest** | `backend/artifacts/lgbm_iforest/iforest.joblib` | sklearn joblib | 300 trees | CIC-IDS2017 (benign only) | Unsupervised anomaly scoring |
+| 5 | **1D-CNN Beacon** | `backend/artifacts/beacon_cnn/model.onnx` | ONNX (opset 13, tf2onnx) | 21,697 | CTU-13 | Botnet C2 beaconing from packet sequences |
+
+The archive names above identify the original model source archives; those ZIP files are not included in this checkout. The deployed model files and supporting artifacts are stored under `backend/artifacts/`.
 
 ---
 
