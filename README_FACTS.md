@@ -12,7 +12,7 @@
 
 | | |
 |---|---|
-| 📅 **Inspection date** | 2026-10-13 (Asia/Calcutta) |
+| 📅 **Inspection date** | 2026-10-09 (Asia/Calcutta) |
 | 💻 **Host** | Windows 11 (unless a command is marked otherwise) |
 | 📁 **Paths** | Relative to the repository root; line numbers refer to this checkout |
 
