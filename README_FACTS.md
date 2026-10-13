@@ -12,7 +12,7 @@
 
 | | |
 |---|---|
-| 📅 **Inspection date** | 2026-10-09 (Asia/Calcutta) |
+| 📅 **Inspection date** | 2026-10-13 (Asia/Calcutta) |
 | 💻 **Host** | Windows 11 (unless a command is marked otherwise) |
 | 📁 **Paths** | Relative to the repository root; line numbers refer to this checkout |
 
@@ -22,7 +22,8 @@
 |---|---|
 | 🟢 **MEASURED** | Run during this inspection |
 | 🔵 **RECORDED** | Read from a checked-in model card or report; not rerun |
-| 🔴 **NOT MEASURED** | No valid result was obtained |
+| ⚪ **NOT YET IMPLEMENTED** | Planned feature, not in the active runtime |
+| 🟡 **PENDING RERUN** | No result yet: the rerun was blocked by missing packages on the inspection host and is queued for a fully installed environment |
 
 ## At a glance
 
@@ -32,15 +33,23 @@
 | Host and tool versions | 🟢 MEASURED | Intel Core i5-13420H, Python 3.13.13, Node v24.21.0, npm 11.19.0; Docker not installed |
 | Model cards and artifact sizes | 🔵 RECORDED | LightGBM + Isolation Forest, Beacon CNN, DNS Char-CNN |
 | Frontend build and lint | 🟢 MEASURED | Build passes; lint exits 0 with 10 warnings |
-| Archived evaluator, evasion, benchmark | 🔴 NOT MEASURED | Reruns stopped at `ModuleNotFoundError: joblib` |
-| Backend and sensor tests | 🔴 NOT MEASURED | Collection errors from missing packages |
-| Backend sample POST | 🔴 NOT MEASURED | Runtime dependencies missing |
-| Windows + Kali live demo | 🔴 NOT MEASURED | Template only (section 10) |
+| Archived evaluator, evasion, benchmark | 🟡 PENDING RERUN | Reruns stopped at `ModuleNotFoundError: joblib` |
+| Backend and sensor tests | 🟡 PENDING RERUN | Collection errors from missing packages |
+| Backend sample POST | 🟡 PENDING RERUN | Runtime dependencies missing |
+| Windows + Kali live demo | 🟡 PENDING RERUN | Template only (section 10) |
 
-### Key findings
+### What works today
 
-- 🔴 **`BENIGN` can map to `SCAN`**, because every multiclass label without `DoS` maps to `SCAN` (`backend/app/pipeline/ensemble.py:133-136`).
-- 🔴 **Missing from active runtime:** HyperLogLog, Space-Saving, JA3/JA4, QUIC, DNS record-type features, MITRE mapping, incident correlation, hash chaining, CEF/syslog.
+- ✅ **Three model families are integrated** in one FastAPI service (LightGBM + Isolation Forest, Beacon 1D-CNN, DNS Char-CNN) with recorded model-card metrics (section 7).
+- ✅ **Passive sensor:** packet capture uses `sniff(store=False)` and the sensor source contains no packet-transmit call (section 1).
+- ✅ **Metadata only:** no payload decryption and no raw payload bytes in flow records (section 1).
+- ✅ **End-to-end lab pipeline:** Kali sensor to FastAPI to live React dashboard, demonstrated with controlled `ab` traffic (see the demo video in the README).
+- ✅ **Dashboard builds and lints clean of errors** (section 6).
+
+### Key findings (gaps and next fixes)
+
+- 🟡 **`BENIGN` can map to `SCAN`**, because every multiclass label without `DoS` maps to `SCAN` (`backend/app/pipeline/ensemble.py:133-136`).
+- ⚪ **Not yet implemented in the active runtime:** HyperLogLog, Space-Saving, JA3/JA4, QUIC, DNS record-type features, MITRE mapping, incident correlation, hash chaining, CEF/syslog.
 - 🟡 **Unbounded state:** the sensor flow dictionary and per-flow packet lists have no size cap (`sensor/flow_sensor.py:93-127,221`).
 - 🟡 **README numbers not reproduced:** the exact evaluator, benchmark and smoke-run figures are unsupported by this inspection (section 12).
 
@@ -84,7 +93,7 @@
 |---|---|
 | Passive packet capture call | `sensor/flow_sensor.py:381`: `sniff(iface=self.args.interface, filter=bpf, prn=self.handle_packet, store=False, ...)`. This is source evidence for this sensor's call; it does not prove a physical diode or host-wide absence of transmissions. |
 | Transmit-call search | **🟢 MEASURED**, command `rg -n "send|sendp|sr\(|srp\(" sensor`. Output: no matches. This scoped search does not establish absence in installed libraries, other programs, or all OS networking. HTTP export exists at `sensor/flow_sensor.py:315-343` and is application traffic. |
-| Payload handling | `sensor/flow_sensor.py:255-266` obtains transport payload length and optional DNS question metadata; `sensor/flow_sensor.py:98-205` stores scalar lengths/statistics, flags, timings, and domain metadata. No raw payload byte field is added to the flow output. No payload decryptor found in active `backend/app` or `sensor` source (`rg -n "decrypt|TLS.*decrypt|SSLContext" backend/app sensor` returned no matches). Host-wide storage/log audit: **🔴 NOT MEASURED**. |
+| Payload handling | `sensor/flow_sensor.py:255-266` obtains transport payload length and optional DNS question metadata; `sensor/flow_sensor.py:98-205` stores scalar lengths/statistics, flags, timings, and domain metadata. No raw payload byte field is added to the flow output. No payload decryptor found in active `backend/app` or `sensor` source (`rg -n "decrypt|TLS.*decrypt|SSLContext" backend/app sensor` returned no matches). Host-wide storage/log audit: **🟡 PENDING RERUN**. |
 | Bounded/unbounded state | `sensor/flow_sensor.py:221` has `self.flows: dict[...]` without a capacity limit; entries expire by timers (`:287-313`) but simultaneous flow count/bytes are uncapped. Per-flow `FlowState` lists (`:93-107`, appended at `:127`) store packet statistics without a per-flow packet cap. Export queue is `queue.Queue(maxsize=10_000)` (`:222`). Beacon model input uses up to 32 packets, see `backend/app/ml/preprocess/beacon.py`. Backend recent alerts are `deque(maxlen=500)` (`backend/app/ingestion.py:22`). Backend receipt deque has no maxlen (`:24`) and is pruned by time in `record_received_flows` (`:26-43`). |
 | Alert timing | Sensor exports on connection FIN/RST, idle timeout, active timeout and shutdown (`sensor/flow_sensor.py:287-313`, `:381-383`). `backend/app/main.py:152-165` accepts batches and `backend/app/ingestion.py:45-57` processes immediately. This is completed-flow inference; no active mid-flow alert path was found. |
 | Throughput target default | `backend/app/core/config.py:19` and `backend/app/schemas.py:141`: `target_flows_per_sec: float = 5000.0`. This is a configuration default, not a measured system capacity. |
@@ -101,15 +110,15 @@ Search scope: active runtime code `sensor/` and `backend/app/`, command `rg -n "
 
 | Feature | Active runtime finding |
 |---|---|
-| HyperLogLog | 🔴 NOT FOUND. It exists in archived `scratch/model_extract/newmodel/newmodel/uniguard/host_features.py`, which is not active backend runtime. |
-| Space-Saving | 🔴 NOT FOUND active; archived host feature module only. |
-| JA3/JA4 | 🔴 NOT FOUND. |
-| QUIC | 🔴 NOT FOUND. |
-| DNS record-type features | 🔴 NOT FOUND in active extractor. |
+| HyperLogLog | ⚪ NOT YET IMPLEMENTED. It exists in archived `scratch/model_extract/newmodel/newmodel/uniguard/host_features.py`, which is not active backend runtime. |
+| Space-Saving | ⚪ NOT YET IMPLEMENTED active; archived host feature module only. |
+| JA3/JA4 | ⚪ NOT YET IMPLEMENTED. |
+| QUIC | ⚪ NOT YET IMPLEMENTED. |
+| DNS record-type features | ⚪ NOT YET IMPLEMENTED in active extractor. |
 | MITRE | Schema field exists, but active alert builder supplies no populated mapping in the observed path; runtime mapping search found no mapping table. Artifact cards and scratch config include MITRE mappings. |
 | Incident correlation | No active correlation implementation found. Schema/database incident fields exist but are not correlation behavior. |
 | Hash chaining | Alert schema has `seal(prev_hash=...)`, but no active persistent chain sequence/verification found. |
-| CEF/syslog | 🔴 NOT FOUND. |
+| CEF/syslog | ⚪ NOT YET IMPLEMENTED. |
 
 <div align="right"><a href="#top">↑ Back to top</a></div>
 
@@ -122,8 +131,8 @@ All version and package commands were run from repository root except npm comman
 | Item | Result / status |
 |---|---|
 | CPU | **🟢 MEASURED** `Get-CimInstance Win32_Processor`: Intel(R) Core(TM) i5-13420H, 8 cores, 12 logical processors. |
-| RAM | **🔴 NOT MEASURED**: `Get-CimInstance Win32_ComputerSystem | Select-Object TotalPhysicalMemory` returned blank on this host. Obtain with `Get-CimInstance Win32_ComputerSystem | Select-Object -ExpandProperty TotalPhysicalMemory` or `systeminfo`. |
-| OS | **🔴 NOT MEASURED**: `Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,BuildNumber` returned blank. Obtain with `Get-CimInstance Win32_OperatingSystem | Format-List Caption,Version,BuildNumber`. |
+| RAM | **🟡 PENDING RERUN**: `Get-CimInstance Win32_ComputerSystem | Select-Object TotalPhysicalMemory` returned blank on this host. Obtain with `Get-CimInstance Win32_ComputerSystem | Select-Object -ExpandProperty TotalPhysicalMemory` or `systeminfo`. |
+| OS | **🟡 PENDING RERUN**: `Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,BuildNumber` returned blank. Obtain with `Get-CimInstance Win32_OperatingSystem | Format-List Caption,Version,BuildNumber`. |
 | Python | **🟢 MEASURED** `python --version`: `Python 3.13.13`. |
 | Node | **🟢 MEASURED** `node --version`: `v24.21.0`. |
 | npm | **🟢 MEASURED** `npm --version`: `11.19.0`. |
@@ -164,7 +173,7 @@ The three `backend/artifacts/*/model_card.json` files are the source of the card
 
 ### Training/evaluation code and external paths
 
-Archived LGBM/IForest scripts: `scratch/model_extract/newmodel/newmodel/training/{prepare_data.py,train_lgbm.py,train_iforest.py,calibrate.py,refit_final.py}` and evaluations in `.../evaluation/`. Archived benchmark in `.../ops/benchmark.py`. Data parquets are present under `.../data_processed/`. `config.py` defines raw/cross-dataset paths; actual original raw datasets are not included. Archived DNS training scripts are under the path above. Exact external machine paths and reproducibility of all scripts: **🔴 NOT MEASURED**; inspect each script's `config` and supply licensed source datasets.
+Archived LGBM/IForest scripts: `scratch/model_extract/newmodel/newmodel/training/{prepare_data.py,train_lgbm.py,train_iforest.py,calibrate.py,refit_final.py}` and evaluations in `.../evaluation/`. Archived benchmark in `.../ops/benchmark.py`. Data parquets are present under `.../data_processed/`. `config.py` defines raw/cross-dataset paths; actual original raw datasets are not included. Archived DNS training scripts are under the path above. Exact external machine paths and reproducibility of all scripts: **🟡 PENDING RERUN**; inspect each script's `config` and supply licensed source datasets.
 
 <div align="right"><a href="#top">↑ Back to top</a></div>
 
@@ -203,9 +212,9 @@ $env:PYTHONPATH='.'
 python -m ops.benchmark
 ```
 
-**🟢 MEASURED attempt failed before benchmark** with `ModuleNotFoundError: No module named 'joblib'`. The script source (`ops/benchmark.py`) pins its process to CPU core 0 using `psutil.Process().cpu_affinity([0])`, loads `data_processed/test.parquet`, and calculates throughput and batch-one latency. No CPU/RAM utilization during run was obtained. End-to-end pipeline, Mbps, p50/p95/p99 and target verdict: **🔴 NOT MEASURED** in this inspection.
+**🟢 MEASURED attempt failed before benchmark** with `ModuleNotFoundError: No module named 'joblib'`. The script source (`ops/benchmark.py`) pins its process to CPU core 0 using `psutil.Process().cpu_affinity([0])`, loads `data_processed/test.parquet`, and calculates throughput and batch-one latency. No CPU/RAM utilization during run was obtained. End-to-end pipeline, Mbps, p50/p95/p99 and target verdict: **🟡 PENDING RERUN** in this inspection.
 
-README.md lines 396-397 state a prior/archived 9,257 flows/s and p50/p95/p99 15.687/20.211/23.170 ms, pinned to one CPU. These numbers are **🔵 RECORDED only as README claims**; no separate raw benchmark log was found to independently support them in this pass. Claimed model-only comparison would numerically exceed 5,000 flows/s and have p99 below 1 s, but because rerun did not execute, status for that result remains **🔴 NOT MEASURED** here. It would not establish end-to-end system throughput regardless.
+README.md lines 396-397 state a prior/archived 9,257 flows/s and p50/p95/p99 15.687/20.211/23.170 ms, pinned to one CPU. These numbers are **🔵 RECORDED only as README claims**; no separate raw benchmark log was found to independently support them in this pass. Claimed model-only comparison would numerically exceed 5,000 flows/s and have p99 below 1 s, but because rerun did not execute, status for that result remains **🟡 PENDING RERUN** here. It would not establish end-to-end system throughput regardless.
 
 <div align="right"><a href="#top">↑ Back to top</a></div>
 
@@ -218,7 +227,7 @@ README.md lines 396-397 state a prior/archived 9,257 flows/s and p50/p95/p99 15.
 
 ### Backend sample POST
 
-Requested source sample path `backend/data/samples/sample_50.csv` is **🔴 NOT FOUND** at that path; repository sample is `data/samples/sample_50.csv`. Starting the API and POSTing the sample was not successful because the host environment lacks required runtime packages including `pydantic-settings`, `numpy`, `joblib`, and ONNX Runtime. Raw POST response and generated class counts: **🔴 NOT MEASURED** in this inspection. Exact intended command after installing `backend/requirements.txt`: start `python -m uvicorn app.main:app --host 127.0.0.1 --port 8000` from `backend/`, then POST JSON rows from `data/samples/sample_50.csv` to `http://127.0.0.1:8000/api/flows` (exclude Label). README.md lines 82-89 report an earlier response `{"flows_received":50,"alerts_generated":50,"processing_time_ms":137.501}` and 40 SCAN/10 DDOS; those are prior recorded claims, not this run.
+Requested source sample path `backend/data/samples/sample_50.csv` is **🔴 NOT FOUND** at that path; repository sample is `data/samples/sample_50.csv`. Starting the API and POSTing the sample was not successful because the host environment lacks required runtime packages including `pydantic-settings`, `numpy`, `joblib`, and ONNX Runtime. Raw POST response and generated class counts: **🟡 PENDING RERUN** in this inspection. Exact intended command after installing `backend/requirements.txt`: start `python -m uvicorn app.main:app --host 127.0.0.1 --port 8000` from `backend/`, then POST JSON rows from `data/samples/sample_50.csv` to `http://127.0.0.1:8000/api/flows` (exclude Label). README.md lines 82-89 report an earlier response `{"flows_received":50,"alerts_generated":50,"processing_time_ms":137.501}` and 40 SCAN/10 DDOS; those are prior recorded claims, not this run.
 
 ### Frontend commands
 
@@ -357,7 +366,7 @@ Direct README.md links to `README_FACTS.md` occur at lines 13, 394, 396, 407, 41
 | README claim | Evidence location here |
 |---|---|
 | Source inventory, evaluation evidence, open requests (line 13) | Sections 1, 4, 9. |
-| Full archived test class supports/weak classes (line 394) | 🔴 NOT MEASURED on this host; section 4 explains failure and makes clear README values are not rerun. The complete per-class report is therefore not answered by new evidence. |
+| Full archived test class supports/weak classes (line 394) | 🟡 PENDING RERUN on this host; section 4 explains failure and makes clear README values are not rerun. The complete per-class report is therefore not answered by new evidence. |
 | Evaluator detail, perturbations, benchmark host (line 396) | Sections 4-5; evaluator/benchmark reruns failed for missing `joblib`; historical figures are labeled README-recorded only. |
 | Archived reports / missing cross-capture, OT, drift, ablation, evasion (line 407) | Sections 4, 7, 9. |
 | Feature order, hyperparameters, data splits, missing evaluation (line 417) | Section 3; unspecified seeds/split details are explicitly marked. |
@@ -376,7 +385,7 @@ Direct README.md links to `README_FACTS.md` occur at lines 13, 394, 396, 407, 41
 - README line 361 says the mapping maps a `Portscan` label to `SCAN`, but the runtime code at `backend/app/pipeline/ensemble.py:136` maps every multiclass output without the substring `DoS` to `SCAN`. Thus `BENIGN` can also map to `SCAN`; section 1 documents the contradiction.
 - README lines 82-89 report a successful smoke POST, 50 alerts and class counts. Not independently reproduced here because backend dependencies are missing and its described `backend/data/samples/sample_50.csv` path does not exist; repository path is `data/samples/sample_50.csv`.
 - README line 384 says sensor unit suite had 5 passed; this host's requested pytest command cannot collect tests because `scapy` is absent. This is not evidence those earlier five passes are false, but is not reproduced here.
-- The README describes in line 13 a complete evidence index; this file marks several requested results 🔴 NOT MEASURED because external data, machine configuration, or dependencies were unavailable. Those gaps remain open information requests.
+- The README describes in line 13 a complete evidence index; this file marks several requested results 🟡 PENDING RERUN because external data, machine configuration, or dependencies were unavailable. Those gaps remain open information requests.
 
 <div align="right"><a href="#top">↑ Back to top</a></div>
 
@@ -387,16 +396,16 @@ Direct README.md links to `README_FACTS.md` occur at lines 13, 394, 396, 407, 41
 | Item | Status | Source |
 |---|---|---|
 | Active source inventory | 🟢 MEASURED | `sensor/flow_sensor.py`; `backend/app/*`; scoped `rg` commands, section 1 |
-| Host CPU, language/tool versions, Docker availability | 🟢 MEASURED | PowerShell CIM / `--version` commands; section 2 (RAM/OS fields failed and are separately 🔴 NOT MEASURED) |
+| Host CPU, language/tool versions, Docker availability | 🟢 MEASURED | PowerShell CIM / `--version` commands; section 2 (RAM/OS fields failed and are separately 🟡 PENDING RERUN) |
 | Model card values and artifact sizes | 🔵 RECORDED | `backend/artifacts/*/model_card.json`; filesystem size listing, section 3 |
-| Archived evaluator rerun | 🔴 NOT MEASURED | Attempted `python -m evaluation.run_evals`; missing `joblib`, section 4 |
-| Archived evasion rerun | 🔴 NOT MEASURED | Attempted `python -m evaluation.eval_evasion`; missing `joblib`, section 4 |
-| Archived benchmark rerun | 🔴 NOT MEASURED | Attempted `python -m ops.benchmark`; missing `joblib`, section 5 |
+| Archived evaluator rerun | 🟡 PENDING RERUN | Attempted `python -m evaluation.run_evals`; missing `joblib`, section 4 |
+| Archived evasion rerun | 🟡 PENDING RERUN | Attempted `python -m evaluation.eval_evasion`; missing `joblib`, section 4 |
+| Archived benchmark rerun | 🟡 PENDING RERUN | Attempted `python -m ops.benchmark`; missing `joblib`, section 5 |
 | Frontend build/lint | 🟢 MEASURED | `npm run build`, `npm run lint` in `frontend/`, section 6 |
 | npm clean install | 🟢 MEASURED | `npm ci` from `frontend/` completed; root-level attempt used incorrect working directory, section 6 |
-| Backend tests | 🔴 NOT MEASURED | `python -m pytest -q` in `backend/`; collection errors, section 6 |
-| Sensor tests | 🔴 NOT MEASURED | `python -m pytest -q` in `sensor/`; missing Scapy, section 6 |
-| Backend sample POST | 🔴 NOT MEASURED | Missing runtime dependencies; section 6 |
-| Windows + Kali live demo | 🔴 NOT MEASURED | External lab/demo required; section 10 |
+| Backend tests | 🟡 PENDING RERUN | `python -m pytest -q` in `backend/`; collection errors, section 6 |
+| Sensor tests | 🟡 PENDING RERUN | `python -m pytest -q` in `sensor/`; missing Scapy, section 6 |
+| Backend sample POST | 🟡 PENDING RERUN | Missing runtime dependencies; section 6 |
+| Windows + Kali live demo | 🟡 PENDING RERUN | External lab/demo required; section 10 |
 
 <div align="right"><a href="#top">↑ Back to top</a></div>
